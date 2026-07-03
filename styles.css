@@ -275,7 +275,12 @@ nav a:hover::after { width: 100%; }
 .cursor { animation: blink 1s infinite; color: var(--primary); }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 .hero-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: 2.5rem; }
-
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 /* ==========================================================================
    STATS BAR
    ========================================================================== */
@@ -618,8 +623,21 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
     .contact-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     
-    .hero-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
-    .btn-primary, .btn-outline { width: 100%; min-width: 200px; padding: 1rem; }
+   .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    gap: 1rem;
+}
+.btn-primary, .btn-outline {
+    width: 100%;
+    min-width: 200px;
+    padding: 1rem;
+    white-space: nowrap;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 /* 600px */
