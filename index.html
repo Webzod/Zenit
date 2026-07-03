@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Zénit | Agencia Digital · Diseño Web Profesional · SEO · Resultados</title>
+    <meta name="description" content="Zénit es una agencia digital especializada en diseño web profesional, SEO, webs ultra rápidas y responsive. Transformamos tu idea en una web que vende. Primera consulta gratis.">
+    <meta name="keywords" content="agencia digital, diseño web profesional, páginas web, SEO posicionamiento, web responsive, mantenimiento web, webs rápidas, desarrollo web">
+    <meta name="author" content="Zénit Digital Agency">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#6C63FF">
+
+    <meta property="og:title" content="Zénit | Agencia Digital · Diseño Web Profesional">
+    <meta property="og:description" content="Transformamos tu idea en una página web que trabaja 24/7 para hacer crecer tu negocio. Primera consulta gratis.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zenitdigital.com">
+    <meta property="og:image" content="https://zenitdigital.com/og-image.jpg">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Zénit Digital">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zénit | Agencia Digital">
+    <meta name="twitter:description" content="Diseño web profesional, SEO y resultados reales para tu negocio.">
+
+    <link rel="canonical" href="https://zenitdigital.com">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M5 10 L35 10 L5 30 L35 30' stroke='%236C63FF' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Zénit Digital",
+          "url": "https://zenitdigital.com",
+          "description": "Agencia digital especializada en diseño web profesional y SEO"
+        },
+        {
+          "@type": "ProfessionalService",
+          "name": "Zénit Digital Agency",
+          "description": "Agencia digital especializada en diseño web profesional, SEO y posicionamiento web",
+          "url": "https://zenitdigital.com",
+          "telephone": "+584166806215",
+          "openingHours": "Mo-Fr 09:00-18:00",
+          "priceRange": "$80 - $500",
+          "serviceType": ["Diseño Web", "SEO", "Mantenimiento Web", "Web Responsive", "Webs Ultra Rápidas"]
+        }
+      ]
+    }
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        page_title: 'Zénit Digital - Agencia Web',
+        page_location: window.location.href,
+        send_page_view: true
+      });
+    </script>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+    <div id="scroll-progress"></div>
+
+    <div id="loader">
+        <div class="loader-content">
+            <svg class="logo-svg loader-svg" width="80" height="80" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 10 L35 10 L5 30 L35 30" stroke="#6C63FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="path-anim" />
+            </svg>
+            <div class="loader-text" id="loader-text"></div>
+        </div>
+    </div>
+
+    <header id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo-link" title="Inicio Zénit">
+                <svg class="logo-svg main-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad-top" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#6C63FF"/>
+                            <stop offset="100%" stop-color="#00D9FF"/>
+                        </linearGradient>
+                        <linearGradient id="grad-bot" x1="0" y1="40" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#00D9FF"/>
+                            <stop offset="100%" stop-color="#6C63FF"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M5 10 L35 10" stroke="url(#grad-top)" stroke-width="4" stroke-linecap="round" class="z-line top-line"/>
+                    <path d="M35 10 L5 30" stroke="#6C63FF" stroke-width="4" stroke-linecap="round" class="z-line mid-line"/>
+                    <path d="M5 30 L35 30" stroke="url(#grad-bot)" stroke-width="4" stroke-linecap="round" class="z-line bot-line"/>
+                    <circle cx="5" cy="10" r="3" fill="#00D9FF" class="pulse-dot"/>
+                    <circle cx="35" cy="30" r="3" fill="#6C63FF" class="pulse-dot"/>
+                </svg>
+                <div class="logo-text-wrapper">
+                    <span class="logo-text"><span class="logo-letter-z">Z</span><span class="gradient-text">ÉNI</span><span class="logo-letter-t">T</span></span>
+                    <span class="tagline">&lt; digital agency &gt;</span>
+                </div>
+            </a>
+
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#portafolio">Portafolio</a></li>
+                    <li><a href="#proceso">Proceso</a></li>
+                    <li><a href="#precios">Precios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <button class="btn-primary header-cta" id="header-cta">Quiero mi web</button>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <canvas id="hero-canvas"></canvas>
+            <div class="grid-overlay"></div>
+            <div class="floating-code">
+                <span>{ }</span>
+                <span>&lt;/&gt;</span>
+                <span>#</span>
+                <span>;</span>
+                <span>()</span>
+            </div>
+            
+            <div class="container hero-content">
+                <div class="eyebrow">🚀 Agencia Digital · Diseño · Desarrollo · Resultados</div>
+                <h1 class="hero-title"><span id="typewriter"></span><span class="cursor">|</span></h1>
+                <p class="hero-subtitle">Transformamos tu idea en una página web que trabaja 24/7 para hacer crecer tu negocio.</p>
+                <div class="hero-buttons">
+                    <a href="#portafolio" class="btn-outline">Ver nuestro trabajo</a>
+                    <a href="#contacto" class="btn-primary glow-violet">Hablar con un experto</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-bar reveal">
+            <div class="container stats-grid">
+                <div class="stat-item">
+                    <h3 class="counter" data-target="120">0</h3>
+                    <p>Proyectos entregados</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="5">0</h3>
+                    <p>Años de experiencia</p>
+                </div>
+                <div class="stat-item">
+                    <h3><span class="counter" data-target="98">0</span>%</h3>
+                    <p>Clientes satisfechos</p>
+                </div>
+                <div class="stat-item">
+                    <h3>x<span class="counter" data-target="3">0</span></h3>
+                    <p>Aumento en ventas</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="services section-pad reveal">
+            <div class="container">
+                <h2 class="section-title">Lo que hacemos mejor</h2>
+                <div class="services-grid">
+                    <div class="service-card tilt" data-tilt>
+                        <div class="icon">🖥️</div>
+                        <h3>Diseño Web Profesional</h3>
+                        <p>Creamos sitios web modernos, visualmente únicos y 100% personalizados que representan la identidad de tu marca y generan confianza desde el primer segundo.</p>
+                        <div class="tags"><span>[HTML5]</span><span>[CSS3]</span><span>[UX/UI]</span><span>[Branding]</span></div>
+                    </div>
+                    <div class="service-card tilt" data-tilt>
+                        <div class="icon">🔧</div>
+                        <h3>Mantenimiento y Soporte</h3>
+                        <p>Tu web siempre funcionando y actualizada. Nos encargamos de la seguridad, actualizaciones y corrección de errores para que nunca pierdas un cliente por problemas técnicos.</p>
+                        <div class="tags"><span>[Soporte]</span><span>[Seguridad]</span><span>[Updates]</span><span>[Backups]</span></div>
+                    </div>
+                    <div class="service-card tilt" data-tilt>
+                        <div class="icon">📱</div>
+                        <h3>Diseño Responsive</h3>
+                        <p>El 70% de tus clientes navega desde el móvil. Diseñamos cada web adaptada perfectamente a cualquier dispositivo para que nunca pierdas una venta.</p>
+                        <div class="tags"><span>[Mobile First]</span><span>[Tablet]</span><span>[Desktop]</span><span>[Cross-browser]</span></div>
+                    </div>
+                    <div class="service-card tilt center-card" data-tilt>
+                        <div class="icon">🔍</div>
+                        <h3>SEO y Posicionamiento</h3>
+                        <p>Aparecer primero en Google no es suerte, es estrategia. Optimizamos tu web desde el día 1 con estructura semántica, velocidad y Google Search Console.</p>
+                        <div class="tags"><span>[SEO]</span><span>[Google]</span><span>[Analytics]</span><span>[Keywords]</span></div>
+                    </div>
+                    <div class="service-card tilt center-card" data-tilt>
+                        <div class="icon">⚡</div>
+                        <h3>Webs Ultra Rápidas</h3>
+                        <p>Una web lenta pierde clientes. Optimizamos cada línea de código para que tu sitio cargue en menos de 2 segundos, mejorando SEO y experiencia.</p>
+                        <div class="tags"><span>[Performance]</span><span>[Core Web Vitals]</span><span>[Optimización]</span><span>[CDN]</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portafolio" class="portfolio section-pad reveal">
+            <div class="container">
+                <h2 class="section-title">Proyectos que hablan por nosotros</h2>
+                <div class="portfolio-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="basico">Básico</button>
+                    <button class="filter-btn" data-filter="pro">Pro</button>
+                    <button class="filter-btn" data-filter="premium">Premium</button>
+                </div>
+                <div class="portfolio-grid">
+                    <a href="https://limpiotuaire2.vercel.app" target="_blank" class="portfolio-item basico" data-name="LimpioTuAire" title="Visitar LimpioTuAire">
+                        <div class="badge">Plan Básico</div>
+                        <div class="preview-bg" style="--bg-color: #1a237e;">
+                            <div class="mockup-css">
+                                <div class="nav-mock"></div>
+                                <div class="hero-mock"></div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>LimpioTuAire</h3>
+                            <p>HVAC · +60% consultas</p>
+                            <div class="tags"><span>[HTML]</span><span>[CSS]</span><span>[JS]</span></div>
+                            <div class="links"><span class="btn-sm">Visitar sitio →</span></div>
+                        </div>
+                    </a>
+                    <a href="https://dulcearte.vercel.app" target="_blank" class="portfolio-item pro" data-name="Dulce Arte" title="Visitar Dulce Arte">
+                        <div class="badge">Plan Pro</div>
+                        <div class="preview-bg" style="--bg-color: #880e4f;">
+                            <div class="mockup-css">
+                                <div class="nav-mock"></div>
+                                <div class="hero-mock"></div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>Dulce Arte Repostería</h3>
+                            <p>Repostería · +120% pedidos</p>
+                            <div class="tags"><span>[HTML]</span><span>[CSS]</span><span>[Animaciones]</span></div>
+                            <div class="links"><span class="btn-sm">Visitar sitio →</span></div>
+                        </div>
+                    </a>
+                    <a href="https://foodrush.vercel.app" target="_blank" class="portfolio-item premium" data-name="FoodRush" title="Visitar FoodRush">
+                        <div class="badge premium-badge">Plan Premium</div>
+                        <div class="preview-bg" style="--bg-color: #bf360c;">
+                            <div class="mockup-css">
+                                <div class="nav-mock"></div>
+                                <div class="hero-mock"></div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>FoodRush Restaurant</h3>
+                            <p>Restaurante · +180% pedidos</p>
+                            <div class="tags"><span>[React]</span><span>[Node.js]</span><span>[SEO]</span></div>
+                            <div class="links"><span class="btn-sm">Visitar sitio →</span></div>
+                        </div>
+                    </a>
+                    <a href="https://legalpro.vercel.app" target="_blank" class="portfolio-item pro" data-name="LegalPro" title="Visitar LegalPro">
+                        <div class="badge">Plan Pro</div>
+                        <div class="preview-bg" style="--bg-color: #263238;">
+                            <div class="mockup-css">
+                                <div class="nav-mock"></div>
+                                <div class="hero-mock"></div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>LegalPro Abogados</h3>
+                            <p>Jurídico · +95% consultas</p>
+                            <div class="tags"><span>[HTML5]</span><span>[CSS3]</span><span>[SEO]</span></div>
+                            <div class="links"><span class="btn-sm">Visitar sitio →</span></div>
+                        </div>
+                    </a>
+                    <a href="https://modaviva.vercel.app" target="_blank" class="portfolio-item premium" data-name="ModaViva" title="Visitar ModaViva">
+                        <div class="badge premium-badge">Plan Premium</div>
+                        <div class="preview-bg" style="--bg-color: #4a148c;">
+                            <div class="mockup-css">
+                                <div class="nav-mock"></div>
+                                <div class="hero-mock"></div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>ModaViva Studio</h3>
+                            <p>Estudio creativo · +220% clientes</p>
+                            <div class="tags"><span>[JS]</span><span>[Animaciones]</span><span>[SEO]</span></div>
+                            <div class="links"><span class="btn-sm">Visitar sitio →</span></div>
+                        </div>
+                    </a>
+                    <a href="https://clinicasalud.vercel.app" target="_blank" class="portfolio-item basico" data-name="ClinicaSalud" title="Visitar ClinicaSalud">
+                        <div class="badge">Plan Básico</div>
+                        <div class="preview-bg" style="--bg-color: #004d40;">
+                            <div class="mockup-css">
+                                <div class="nav-mock"></div>
+                                <div class="hero-mock"></div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>ClínicaSalud360</h3>
+                            <p>Centro médico · 3x más citas</p>
+                            <div class="tags"><span>[WordPress]</span><span>[PHP]</span><span>[SEO]</span></div>
+                            <div class="links"><span class="btn-sm">Visitar sitio →</span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-us section-pad reveal">
+            <div class="container why-grid">
+                <div class="why-text">
+                    <h2 class="section-title left-align">No solo diseñamos webs. Construimos herramientas de ventas.</h2>
+                    <ul class="why-list">
+                        <li><strong>Enfoque a conversión:</strong> Cada botón y espacio está pensado para que el usuario contacte o compre.</li>
+                        <li><strong>Código limpio:</strong> Sin plantillas pesadas. Desarrollo a medida para máxima velocidad.</li>
+                        <li><strong>Comunicación clara:</strong> Hablamos tu idioma, sin tecnicismos innecesarios.</li>
+                        <li><strong>Diseño único:</strong> Tu marca es única, tu web no puede ser igual a las demás.</li>
+                        <li><strong>Soporte real:</strong> Estamos contigo incluso después del lanzamiento.</li>
+                    </ul>
+                </div>
+                <div class="why-code">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <pre><code><span class="keyword">const</span> <span class="variable">Zenit</span> = {
+  <span class="property">focus</span>: <span class="string">"Conversión"</span>,
+  <span class="property">code</span>: <span class="string">"Limpio y Rápido"</span>,
+  <span class="property">design</span>: <span class="string">"Único"</span>,
+  <span class="method">deliverResults</span>() {
+    <span class="keyword">return</span> <span class="keyword">this</span>.<span class="property">focus</span> + <span class="property">Strategy</span>;
+  }
+};
+<span class="variable">Zenit</span>.<span class="method">deliverResults</span>(); <span class="comment">// 🚀 Crecimiento</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proceso" class="process section-pad reveal">
+            <div class="container">
+                <h2 class="section-title">Tu web en 4 pasos simples</h2>
+                <div class="process-wrapper">
+                    <svg class="process-line desktop-line" width="100%" height="4" fill="none">
+                        <path d="M0 2 L1200 2" stroke="url(#line-grad)" stroke-width="4" stroke-dasharray="10 10"/>
+                    </svg>
+                    <div class="process-grid">
+                        <div class="process-step">
+                            <div class="step-num">1</div>
+                            <div class="icon">💬</div>
+                            <h3>Descubrimiento</h3>
+                            <p>Nos cuentas sobre tu negocio, objetivos y referentes visuales.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-num">2</div>
+                            <div class="icon">🎨</div>
+                            <h3>Diseño UI/UX</h3>
+                            <p>Creamos una propuesta visual única adaptada a tu marca.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-num">3</div>
+                            <div class="icon">⚙️</div>
+                            <h3>Desarrollo</h3>
+                            <p>Programamos tu web optimizando velocidad y SEO desde el inicio.</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-num">4</div>
+                            <div class="icon">🚀</div>
+                            <h3>Lanzamiento</h3>
+                            <p>Publicamos tu web y te capacitamos para que le saques provecho.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-cta">
+                    <button class="btn-primary glow-violet wa-btn" data-msg="Hola, quiero agendar mi consulta gratis para crear mi página web.">Agendar consulta gratis</button>
+                </div>
+            </div>
+            <svg width="0" height="0">
+                <defs>
+                    <linearGradient id="line-grad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#6C63FF"/>
+                        <stop offset="100%" stop-color="#00D9FF"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </section>
+
+        <section class="testimonials section-pad reveal">
+            <div class="container">
+                <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+                <div class="carousel-container" id="testimonial-carousel">
+                    <div class="carousel-track">
+                        <div class="testimonial-slide active">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&auto=format" alt="Foto de Camila Torres" class="t-img" loading="lazy">
+                            <p class="t-text">"Entregaron todo en tiempo y forma con una calidad increíble. El soporte post-lanzamiento es excelente."</p>
+                            <h4 class="t-name">Camila Torres</h4>
+                            <span class="t-company">ClínicaSalud360</span>
+                        </div>
+                        <div class="testimonial-slide">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&auto=format" alt="Foto de Marco Rodríguez" class="t-img" loading="lazy">
+                            <p class="t-text">"Antes teníamos 5 pedidos online por semana. Con la web de Zénit llegamos a 40 pedidos diarios. La inversión se pagó sola en el primer mes."</p>
+                            <h4 class="t-name">Marco Rodríguez</h4>
+                            <span class="t-company">FoodRush</span>
+                        </div>
+                        <div class="testimonial-slide">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&auto=format" alt="Foto de Valentina Herrera" class="t-img" loading="lazy">
+                            <p class="t-text">"Duplicamos los clientes online en 60 días. El diseño es exactamente lo que soñé. Son increíblemente profesionales."</p>
+                            <h4 class="t-name">Valentina Herrera</h4>
+                            <span class="t-company">ModaViva</span>
+                        </div>
+                        <div class="testimonial-slide">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&auto=format" alt="Foto de Jorge Santana" class="t-img" loading="lazy">
+                            <p class="t-text">"Mi web anterior era vergonzosa. Ahora los clientes me dicen que la web les transmite confianza inmediata. Subí un 95% en consultas."</p>
+                            <h4 class="t-name">Jorge Santana</h4>
+                            <span class="t-company">LegalPro</span>
+                        </div>
+                        <div class="testimonial-slide">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&auto=format" alt="Foto de Andrés Vargas" class="t-img" loading="lazy">
+                            <p class="t-text">"Conseguimos inversores gracias a la credibilidad de nuestra web. La mejor inversión del negocio."</p>
+                            <h4 class="t-name">András Vargas</h4>
+                            <span class="t-company">TechStartup</span>
+                        </div>
+                    </div>
+                    <button class="carousel-btn prev-btn" aria-label="Anterior">←</button>
+                    <button class="carousel-btn next-btn" aria-label="Siguiente">→</button>
+                    <div class="carousel-dots"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="precios" class="pricing section-pad reveal">
+            <div class="container">
+                <h2 class="section-title">Planes directos. Sin sorpresas.</h2>
+                <div class="pricing-grid">
+                    <div class="price-card basic-plan">
+                        <h3>PLAN BÁSICO</h3>
+                        <div class="subtitle">Web Informativa Corta</div>
+                        <div class="price">80$</div>
+                        <ul class="features">
+                            <li><span class="check">✅</span> Web de hasta 3 secciones (Inicio, Servicios, Contacto)</li>
+                            <li><span class="check">✅</span> Diseño Personalizado</li>
+                            <li><span class="check">✅</span> Responsive</li>
+                            <li><span class="check">✅</span> 1 mes soporte</li>
+                            <li><span class="check">✅</span> SEO Básico</li>
+                            <li><span class="check">✅</span> Formulario de contacto</li>
+                            <li><span class="check">✅</span> Capacitación: archivos finales + explicación de visualización</li>
+                            <li class="disabled"><span class="cross">❌</span> Blog integrado</li>
+                        </ul>
+                        <div class="delivery">Entrega: 7 días</div>
+                        <button class="btn-outline wa-btn" data-msg="Hola, quiero contratar el Plan Básico ($80).">Quiero el Plan Básico</button>
+                    </div>
+
+                    <div class="price-card pro-plan popular">
+                        <div class="popular-badge">⭐ Más elegido</div>
+                        <h3>PLAN PRO</h3>
+                        <div class="subtitle">Sitio Web Corporativo Completo</div>
+                        <div class="price">200$</div>
+                        <ul class="features">
+                            <li><span class="check">✅</span> Web hasta 6 secciones (Inicio, Nosotros, Servicios, Galería, Blog, Contacto)</li>
+                            <li><span class="check">✅</span> Diseño Premium Único</li>
+                            <li><span class="check">✅</span> Responsive</li>
+                            <li><span class="check">✅</span> SEO Avanzado (velocidad + etiquetas semánticas + Google Search Console)</li>
+                            <li><span class="check">✅</span> Formulario</li>
+                            <li><span class="check">✅</span> 3 Meses Soporte</li>
+                            <li><span class="check">✅</span> Blog</li>
+                            <li><span class="check">✅</span> Animaciones</li>
+                            <li><span class="check">✅</span> Capacitación: Kit de Gestión PDF</li>
+                        </ul>
+                        <div class="delivery">Entrega: 10 días</div>
+                        <button class="btn-primary glow-violet wa-btn" data-msg="Hola, quiero contratar el Plan Pro ($200).">Quiero el Plan Pro</button>
+                    </div>
+
+                    <div class="price-card premium-plan">
+                        <h3>PLAN PREMIUM</h3>
+                        <div class="subtitle">Todo Incluido</div>
+                        <div class="price">500$</div>
+                        <ul class="features">
+                            <li><span class="check">✅</span> Páginas ilimitadas</li>
+                            <li><span class="check">✅</span> Diseño Exclusivo</li>
+                            <li><span class="check">✅</span> Responsive</li>
+                            <li><span class="check">✅</span> 6 Meses Soporte</li>
+                            <li><span class="check">✅</span> Animaciones avanzadas</li>
+                            <li><span class="check">✅</span> SEO & Analítica (Google Search Console + Google Analytics)</li>
+                            <li><span class="check">✅</span> Capacitación: Sesión privada de estadísticas</li>
+                        </ul>
+                        <div class="delivery">Entrega: 14 días</div>
+                        <button class="btn-outline glow-cyan wa-btn" data-msg="Hola, quiero contratar el Plan Premium ($500).">Quiero el Plan Premium</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq section-pad reveal">
+            <div class="container">
+                <h2 class="section-title">Preguntas frecuentes</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Cuánto tarda? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>Básico 7d · Pro 10d · Prémium 14d desde la aprobación del diseño y entrega de materiales.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Necesito saber tecnología? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>No. Nos encargamos de todo el aspecto técnico para que tú te enfoques en tu negocio.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Qué necesito para empezar? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>Solo contáctarnos. Te guiaremos paso a paso en la elección de dominio, hosting y recopilación de contenido.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Incluye dominio y hosting? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>No están incluidos en el precio de desarrollo, pero te asesoramos. Un dominio cuesta ~$15/año y un buen hosting desde $5/mes.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Qué pasa al terminar el soporte? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>Ofrecemos planes de mantenimiento mensual desde $30/mes para mantener tu web segura y actualizada.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Puedo ver ejemplos reales? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>Sí, en nuestra sección de portafolio puedes acceder a links reales de proyectos terminados junto con el plan que se les asignó.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Con qué frecuencia se realizan actualizaciones o cambios en la página web? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>Se realizan las actualizaciones los días sádabo o domingo. Envíame todos los cambios que necesites durante la semana y los aplico todos juntos en una sola sesión.</p>
+                        </div>
+                        <div class="accordion-item">
+                        <button class="accordion-header">¿Qué es el SEO? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>SEO (Search Engine Optimization) es el conjunto de técnicas que hacen que tu web aparezca en los primeros resultados de Google cuando alguien busca lo que tú ofreces, sin pagar por publicidad. Incluye velocidad de carga, estructura del contenido, palabras clave y experiencia de usuario.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Qué es Google Search Console? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>Es una herramienta gratuita de Google que te muestra cómo tu web aparece en los resultados de búsqueda: qué palabras usan las personas para encontrarte, cuántas veces te ven y te hacen clic, y si existen errores técnicos que debas corregir para mejorar tu posicionamiento.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Qué es Google Analytics? <span class="acc-icon">+</span></button>
+                        <div class="accordion-body">
+                            <p>Es una herramienta que mide el comportamiento de los visitantes en tu web: cuántas personas entran, desde dónde llegan (redes sociales, Google, links directos), qué páginas visitan más y cuánto tiempo permanecen. Te ayuda a tomar decisiones basadas en datos reales.</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact section-pad reveal">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <h2 class="section-title left-align">Hablemos de tu proyecto</h2>
+                    <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible para transformar tu idea en una web que vende.</p>
+                    
+                    <button class="btn-primary bg-green wa-btn" data-msg="Hola, quiero información sobre el desarrollo de una web.">
+                        <svg class="wa-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Hablar por WhatsApp
+                    </button>
+                    
+                    <div class="contact-details">
+                        <div class="detail-item icon-aligned">
+                            <svg class="align-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Lunes a Viernes · 09:00 a 18:00</span>
+                        </div>
+                        <div class="detail-item icon-aligned">
+                            <svg class="align-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span>zenit.corex@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nombre completo *</label>
+                            <input type="text" id="name" name="name" required minlength="3">
+                            <span class="error-msg">Por favor ingresa un nombre válido (mín. 3 caracteres)</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error-msg">Por favor ingresa un email válido</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Empresa (Opcional)</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="type">Tipo de proyecto *</label>
+                                <select id="type" name="type" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="Web Informativa">Web Informativa</option>
+                                    <option value="Web Corporativa">Web Corporativa</option>
+                                    <option value="Web Corporativa">Mantenimiento</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Presupuesto *</label>
+                                <select id="budget" name="budget" required>
+                                    <option value="" disabled selected>Selecciona un rango</option>
+                                     <option value="-$80">Menos de $80 </option>
+                                    <option value="$80 - $200">$80 - $200</option>
+                                    <option value="$200 - $500">$200 - $500</option>
+                                    <option value="+$500">Más de $500</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje *</label>
+                            <textarea id="message" name="message" rows="4" required minlength="10"></textarea>
+                            <span class="error-msg">Cuéntanos un poco más (mín. 10 caracteres)</span>
+                        </div>
+                        <button type="submit" class="btn-primary w-100">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta">
+            <div class="gradient-mesh"></div>
+            <div class="floating-code low-op">
+                <span>{ }</span>
+                <span>&lt;/&gt;</span>
+                <span>#</span>
+            </div>
+            <div class="container cta-content reveal">
+                <div class="float-icon">🚀</div>
+                <h2>¿Listo para tener la web que tu negocio merece?</h2>
+                <p>Deja de perder clientes por no tener presencia digital o por tener una web anticuada.</p>
+                <div class="hero-buttons center-flex">
+                    <button class="btn-primary glow-cyan wa-btn" data-msg="Hola, estoy listo para iniciar mi proyecto web.">Comenzar ahora</button>
+                    <a href="#precios" class="btn-outline">Ver planes</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <a href="#" class="logo-link">
+                    <svg class="logo-svg main-svg" width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad-top-f" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#6C63FF"/>
+                                <stop offset="100%" stop-color="#00D9FF"/>
+                            </linearGradient>
+                            <linearGradient id="grad-bot-f" x1="0" y1="40" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#00D9FF"/>
+                                <stop offset="100%" stop-color="#6C63FF"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M5 10 L35 10" stroke="url(#grad-top-f)" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M35 10 L5 30" stroke="#6C63FF" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M5 30 L35 30" stroke="url(#grad-bot-f)" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                    <div class="logo-text-wrapper">
+                        <span class="logo-text"><span class="logo-letter-z">Z</span><span class="gradient-text">ÉNI</span><span class="logo-letter-t">T</span></span>
+                    </div>
+                </a>
+                <p class="footer-desc">Agencia digital especializada en diseño web profesional, rápido y orientado a resultados.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#servicios">Diseño Web</a></li>
+                    <li><a href="#servicios">Mantenimiento</a></li>
+                    <li><a href="#servicios">Diseño Responsive</a></li>
+                    <li><a href="#servicios">SEO</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#servicio">Servicio</a></li>
+                    <li><a href="#portafolio">Portafolio</a></li>
+                    <li><a href="#proceso">Proceso</a></li>
+                    <li><a href="#precios">Precios</a></li>
+                </ul>
+            </div>
+            <div class="footer-col contact-col">
+                <h4>Contacto</h4>
+                <div class="detail-item icon-aligned">
+                    <svg class="align-svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <span>+584166806215</span>
+                </div>
+                <div class="detail-item icon-aligned">
+                    <svg class="align-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>zenit.corex@gmail.com</span>
+                </div>
+                <div class="detail-item icon-aligned">
+                    <svg class="align-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>Lun - Vie, 09:00 - 18:00</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Zénit Digital. Todos los derechos reservados. Hecho con 💜 para negocios que quieren crecer.</p>
+        </div>
+    </footer>
+
+    <button id="floating-wa" class="wa-btn pulse-wa" aria-label="Chat en WhatsApp" data-msg="Hola, visité la web de Zénit y me gustaría hacer una consulta.">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
