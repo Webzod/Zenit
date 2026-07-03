@@ -1,5 +1,5 @@
 // Constants
-const WHATSAPP = "584248780043";
+const WHATSAPP = "+584248780043";
 const GA_ID = "G-XXXXXXXXXX"; // Reemplaza G-XXXXXXXXXX con tu ID real de Google Analytics 4
 
 // Utils
