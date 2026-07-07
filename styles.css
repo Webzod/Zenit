@@ -323,50 +323,6 @@ nav a:hover::after { width: 100%; }
 .tags span { font-family: var(--font-code); font-size: 0.7rem; color: var(--secondary); background: rgba(0, 217, 255, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; }
 
 /* ==========================================================================
-   PORTFOLIO
-   ========================================================================== */
-.portfolio-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
-.filter-btn {
-    background: transparent; border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-main); padding: 0.5rem 1.5rem; border-radius: 20px;
-    cursor: pointer; transition: var(--transition); font-family: var(--font-body);
-}
-.filter-btn.active, .filter-btn:hover { background: var(--primary); border-color: var(--primary); }
-
-.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-.portfolio-item {
-    position: relative; border-radius: var(--border-radius); overflow: hidden;
-    height: 300px; display: block; text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.preview-bg {
-    width: 100%; height: 100%; background-color: var(--bg-color);
-    position: relative; display: flex; justify-content: center; align-items: flex-end;
-}
-.mockup-css {
-    width: 80%; height: 80%; background: #fff; border-radius: 8px 8px 0 0;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden;
-}
-.nav-mock { height: 20px; background: #eee; border-bottom: 1px solid #ddd; }
-.hero-mock { flex: 1; background: #f5f5f5; margin: 10px; border-radius: 4px; }
-
-.badge { position: absolute; top: 1rem; right: 1rem; background: var(--bg-card); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.7rem; font-weight: bold; z-index: 2; border: 1px solid var(--text-soft); }
-.premium-badge { border-color: var(--secondary); color: var(--secondary); }
-
-.portfolio-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 10, 15, 0.95); display: flex; flex-direction: column;
-    justify-content: center; align-items: center; text-align: center;
-    padding: 2rem; opacity: 0; transition: opacity 0.3s ease;
-    clip-path: circle(0% at 50% 50%);
-}
-.portfolio-item:hover .portfolio-overlay { opacity: 1; clip-path: circle(150% at 50% 50%); transition: clip-path 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease; }
-.portfolio-overlay h3 { color: #fff; margin-bottom: 0.5rem; }
-.portfolio-overlay p { margin-bottom: 1rem; color: var(--secondary); }
-.portfolio-overlay .tags { justify-content: center; margin-bottom: 1.5rem; }
-.btn-sm { background: var(--primary); padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-
-/* ==========================================================================
    WHY US
    ========================================================================== */
 .why-us { background: var(--bg-sec); }
@@ -415,34 +371,6 @@ nav a:hover::after { width: 100%; }
     justify-content: center;
     margin-top: var(--process-cta-margin-top);
 }
-
-/* ==========================================================================
-   TESTIMONIALS (Carousel)
-   ========================================================================== */
-.testimonials { background: var(--bg-sec); text-align: center; }
-.carousel-container { position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; padding: 2rem 0; }
-.carousel-track { display: flex; transition: transform 0.5s ease; }
-.testimonial-slide {
-    min-width: 100%; padding: 2rem; opacity: 0.5; transition: opacity 0.5s;
-    display: flex; flex-direction: column; align-items: center;
-}
-.testimonial-slide.active { opacity: 1; }
-.t-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 2px solid var(--primary); }
-.t-text { font-size: 1.2rem; font-style: italic; margin-bottom: 1.5rem; color: var(--text-main); }
-.t-name { font-family: var(--font-heading); color: var(--secondary); }
-.t-company { font-size: 0.8rem; color: var(--text-soft); }
-
-.carousel-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.1); border: none; color: white;
-    width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
-    z-index: 10; transition: var(--transition);
-}
-.carousel-btn:hover { background: var(--primary); }
-.prev-btn { left: 10px; } .next-btn { right: 10px; }
-.carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
-.dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: var(--transition); }
-.dot.active { background: var(--secondary); transform: scale(1.2); }
 
 /* ==========================================================================
    PRICING
@@ -583,7 +511,6 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
 /* 1024px */
 @media (max-width: 1024px) {
     .service-card { flex-basis: 45%; }
-    .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
     .contact-grid { gap: 2rem; }
 }
 
@@ -643,7 +570,6 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
 /* 600px */
 @media (max-width: 600px) {
     .service-card { flex-basis: 100%; }
-    .portfolio-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; text-align: center; }
     .footer-col ul { display: flex; flex-direction: column; align-items: center; }
     .contact-col .detail-item { justify-content: center; }
@@ -654,8 +580,6 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
 /* 430px & 375px & 320px */
 @media (max-width: 480px) {
     .section-pad { padding: 60px 0; }
-    .carousel-btn { display: none; }
-    .testimonial-slide { padding: 1rem; }
     .contact-form-wrapper { padding: 1.5rem; }
 }
 
@@ -668,5 +592,4 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
 /* Touch Device Optimizations */
 @media (hover: none) and (pointer: coarse) {
     #custom-cursor { display: none !important; }
-    .portfolio-overlay { opacity: 1; background: rgba(10, 10, 15, 0.8); clip-path: none; top: auto; bottom: 0; height: auto; padding: 1rem; }
 }
