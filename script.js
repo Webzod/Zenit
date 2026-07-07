@@ -1,5 +1,5 @@
 // Constants
-const WHATSAPP = "+584248780043";
+const WHATSAPP = "+584166806215";
 const GA_ID = "G-XXXXXXXXXX"; // Reemplaza G-XXXXXXXXXX con tu ID real de Google Analytics 4
 
 // Utils
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animateCursor();
 
         // Hover effects
-        const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .service-card, .portfolio-item');
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .service-card');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -318,107 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       10. PORTFOLIO FILTERS & TRACKING
-       ========================================================================== */
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const filter = btn.getAttribute('data-filter');
-            
-            portfolioItems.forEach(item => {
-                item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                if (filter === 'all' || item.classList.contains(filter)) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-
-    portfolioItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const name = item.getAttribute('data-name');
-            gtag('event', 'click_portafolio', { proyecto: name });
-        });
-    });
-
-    /* ==========================================================================
-       11. TESTIMONIAL CAROUSEL
-       ========================================================================== */
-    const track = document.querySelector('.carousel-track');
-    const slides = Array.from(track.children);
-    const nextButton = document.querySelector('.next-btn');
-    const prevButton = document.querySelector('.prev-btn');
-    const dotsNav = document.querySelector('.carousel-dots');
-    
-    slides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if(i === 0) dot.classList.add('active');
-        dot.dataset.slide = i;
-        dotsNav.appendChild(dot);
-    });
-    const dots = Array.from(dotsNav.children);
-
-    let currentIndex = 0;
-    
-    function updateCarousel(index) {
-        track.style.transform = `translateX(-${index * 100}%)`;
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentIndex = index;
-    }
-
-    nextButton.addEventListener('click', () => {
-        const nextIndex = (currentIndex + 1) % slides.length;
-        updateCarousel(nextIndex);
-    });
-
-    prevButton.addEventListener('click', () => {
-        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateCarousel(prevIndex);
-    });
-
-    dotsNav.addEventListener('click', e => {
-        const targetDot = e.target.closest('.dot');
-        if(!targetDot) return;
-        const targetIndex = parseInt(targetDot.dataset.slide);
-        updateCarousel(targetIndex);
-    });
-
-    let autoplayInterval = setInterval(() => {
-        const nextIndex = (currentIndex + 1) % slides.length;
-        updateCarousel(nextIndex);
-    }, 5000);
-
-    const carouselContainer = document.getElementById('testimonial-carousel');
-    carouselContainer.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
-    carouselContainer.addEventListener('mouseleave', () => {
-        autoplayInterval = setInterval(() => {
-            const nextIndex = (currentIndex + 1) % slides.length;
-            updateCarousel(nextIndex);
-        }, 5000);
-    });
-
-    /* ==========================================================================
-       12. FAQ ACCORDION
+       10. FAQ ACCORDION
        ========================================================================== */
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     
@@ -441,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       13. WHATSAPP & CTA BUTTONS
+       11. WHATSAPP & CTA BUTTONS
        ========================================================================== */
     const waButtons = document.querySelectorAll('.wa-btn');
     
@@ -471,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       14. CONTACT FORM
+       12. CONTACT FORM
        ========================================================================== */
     const form = document.getElementById('contact-form');
     
