@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animateCursor();
 
         // Hover effects
-        const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .service-card');
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .service-card, .blog-card');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        7. SCROLL REVEAL & STAGGER
        ========================================================================== */
-    const revealElements = document.querySelectorAll('.reveal');
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip');
     const serviceCards = document.querySelectorAll('.service-card');
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -365,41 +365,195 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.getElementById('header-cta').addEventListener('click', () => {
-        gtag('event', 'click_header_cta');
-        document.getElementById('precios').scrollIntoView({ behavior: 'smooth' });
+    const headerCta = document.getElementById('header-cta');
+    if (headerCta) {
+        headerCta.addEventListener('click', () => {
+            gtag('event', 'click_header_cta');
+            const preciosSection = document.getElementById('precios');
+            if (preciosSection) {
+                preciosSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    /* ==========================================================================
+       11b. VISTA APARTE "CONTACTO"
+       Al hacer click en cualquier enlace de Contacto, se oculta el resto del
+       contenido (todo menos header/footer) y solo se ve esa sección.
+       Cualquier otro enlace de ancla regresa primero a la vista normal.
+       ========================================================================== */
+    function irAContacto() {
+        document.body.classList.add('show-contacto');
+        window.scrollTo(0, 0);
+        gtag('event', 'click_ir_a_contacto');
+    }
+
+    function salirDeContacto(hash) {
+        document.body.classList.remove('show-contacto');
+        if (hash && hash !== '#' && hash !== '#contacto') {
+            setTimeout(() => {
+                const target = document.querySelector(hash);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 60);
+        } else {
+            window.scrollTo(0, 0);
+        }
+    }
+
+    const contactTargets = document.querySelectorAll('a[href="#contacto"], .go-contact, .nav-contact-link');
+    contactTargets.forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            irAContacto();
+        });
+    });
+
+    // Cualquier otro enlace de ancla (Inicio, Servicios, Proceso, Precios, Blog,
+    // "Volver al inicio" dentro de Contacto, logo, etc.) debe regresar primero
+    // a la vista normal si estamos viendo la sección de Contacto aislada.
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        if (link.matches('a[href="#contacto"], .go-contact, .nav-contact-link')) return;
+        link.addEventListener('click', (e) => {
+            if (!document.body.classList.contains('show-contacto')) return;
+            e.preventDefault();
+            salirDeContacto(link.getAttribute('href'));
+        });
+    });
+
+    // El botón "Quiero mi web" del header también debe salir de la vista de Contacto
+    const headerCtaBtn = document.getElementById('header-cta');
+    if (headerCtaBtn) {
+        const originalHeaderCtaHandler = () => {
+            if (document.body.classList.contains('show-contacto')) {
+                salirDeContacto('#precios');
+            }
+        };
+        headerCtaBtn.addEventListener('click', originalHeaderCtaHandler);
+    }
+
+    /* ==========================================================================
+       11c. BLOG CARDS (tracking de clics a artículos externos)
+       ========================================================================== */
+    const blogCards = document.querySelectorAll('.blog-card');
+    blogCards.forEach(card => {
+        card.addEventListener('click', () => {
+            gtag('event', 'click_blog_articulo', {
+                article_title: card.querySelector('h3') ? card.querySelector('h3').innerText : ''
+            });
+        });
     });
 
     /* ==========================================================================
-       12. CONTACT FORM
+       12. CONTACT FORM (solo existe en contacto.html)
        ========================================================================== */
     const form = document.getElementById('contact-form');
-    
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        if (form.checkValidity()) {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const company = document.getElementById('company').value || 'No especificado';
-            const type = document.getElementById('type').value;
-            const budget = document.getElementById('budget').value;
-            const message = document.getElementById('message').value;
 
-            const waMessage = `Hola Zénit! Vengo desde el formulario web.%0A%0A` +
-                              `*Nombre:* ${name}%0A` +
-                              `*Email:* ${email}%0A` +
-                              `*Empresa:* ${company}%0A` +
-                              `*Proyecto:* ${type}%0A` +
-                              `*Presupuesto:* ${budget}%0A%0A` +
-                              `*Mensaje:* ${message}`;
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-            gtag('event', 'form_submit_contacto');
-            
-            window.open(`https://wa.me/${WHATSAPP}?text=${waMessage}`, '_blank');
-            form.reset();
-        } else {
-            form.reportValidity();
-        }
+            if (form.checkValidity()) {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const company = document.getElementById('company').value || 'No especificado';
+                const type = document.getElementById('type').value;
+                const budget = document.getElementById('budget').value;
+                const message = document.getElementById('message').value;
+
+                const waMessage = `Hola Zénit! Vengo desde el formulario web.%0A%0A` +
+                                  `*Nombre:* ${name}%0A` +
+                                  `*Email:* ${email}%0A` +
+                                  `*Empresa:* ${company}%0A` +
+                                  `*Proyecto:* ${type}%0A` +
+                                  `*Presupuesto:* ${budget}%0A%0A` +
+                                  `*Mensaje:* ${message}`;
+
+                gtag('event', 'form_submit_contacto');
+
+                window.open(`https://wa.me/${WHATSAPP}?text=${waMessage}`, '_blank');
+                form.reset();
+            } else {
+                form.reportValidity();
+            }
+        });
+    }
+
+    /* ==========================================================================
+       13. SPLIT TEXT — Títulos que se revelan letra por letra
+       ========================================================================== */
+    function splitTitleText(el) {
+        const text = el.textContent;
+        el.textContent = '';
+        el.setAttribute('aria-label', text);
+        [...text].forEach((char, i) => {
+            const span = document.createElement('span');
+            span.className = 'split-char';
+            span.style.setProperty('--i', i);
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            el.appendChild(span);
+        });
+    }
+
+    const splitTargets = document.querySelectorAll('.section-title');
+    splitTargets.forEach(el => splitTitleText(el));
+
+    const splitObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('split-ready');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    splitTargets.forEach(el => splitObserver.observe(el));
+
+    /* ==========================================================================
+       14. BOTONES MAGNÉTICOS
+       ========================================================================== */
+    if (!isTouchDevice()) {
+        const magneticEls = document.querySelectorAll('.magnetic');
+        magneticEls.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                el.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0, 0)';
+            });
+        });
+    }
+
+    /* ==========================================================================
+       15. RIPPLE EN CLICS DE BOTONES
+       ========================================================================== */
+    const rippleTargets = document.querySelectorAll('.btn-primary, .btn-outline, #floating-wa');
+    rippleTargets.forEach(el => {
+        el.addEventListener('click', function (e) {
+            const rect = this.getBoundingClientRect();
+            const ripple = document.createElement('span');
+            const size = Math.max(rect.width, rect.height);
+            ripple.className = 'ripple-span';
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 650);
+        });
     });
+
+    /* ==========================================================================
+       16. PARALLAX SUAVE DEL HERO
+       ========================================================================== */
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (scrollY < window.innerHeight) {
+                document.documentElement.style.setProperty('--scrollY', scrollY);
+            }
+        }, { passive: true });
+    }
 });
