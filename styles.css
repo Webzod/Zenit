@@ -487,8 +487,9 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
    VISTA APARTE: CONTACTO
    La sección de Contacto queda oculta durante el scroll normal de la página.
    Solo se muestra cuando el usuario hace clic en un enlace "Contacto"
-   (nav, footer, botón del hero), lo cual oculta el resto del contenido y
-   revela únicamente esta sección (header y footer se mantienen visibles).
+   (nav, footer, botón del hero) o entra directamente con #contacto en la URL,
+   lo cual oculta el resto del contenido y revela únicamente esta sección
+   (header y footer se mantienen visibles).
    ========================================================================== */
 #contacto {
     display: none;
@@ -702,35 +703,6 @@ body.show-contacto #contacto {
     50% { border-radius: 60% 40% 45% 55% / 55% 60% 40% 45%; }
 }
 
-/* --- Indicador de scroll animado en el hero --- */
-.scroll-cue {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 26px;
-    height: 42px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    z-index: 3;
-}
-.scroll-cue span {
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    width: 4px;
-    height: 8px;
-    background: var(--secondary);
-    border-radius: 2px;
-    transform: translateX(-50%);
-    animation: scrollCueAnim 1.6s infinite;
-}
-@keyframes scrollCueAnim {
-    0% { opacity: 1; top: 8px; }
-    70% { opacity: 0; top: 24px; }
-    100% { opacity: 0; top: 8px; }
-}
-
 /* --- Brillo pulsante en el eyebrow del hero --- */
 .eyebrow {
     animation: eyebrowGlow 3s ease-in-out infinite;
@@ -866,4 +838,94 @@ input:focus, select:focus, textarea:focus {
 
 @media (hover: none) and (pointer: coarse) {
     #custom-cursor { display: none !important; }
+}
+
+/* ==========================================================================
+   ESTELA DE ESTRELLITAS DEL CURSOR
+   ========================================================================== */
+.cursor-star {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 13px;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    animation: cursorStarFade 0.7s ease-out forwards;
+}
+@keyframes cursorStarFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--drift, 0px)), calc(-50% - 22px)) scale(0.3) rotate(140deg);
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .cursor-star { display: none !important; }
+}
+
+/* ==========================================================================
+   ESTALLIDO DE ESTRELLAS (botón Volver al inicio)
+   ========================================================================== */
+.burst-star {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 100000;
+    transform: translate(-50%, -50%) scale(0.4);
+    animation: burstOut 0.85s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes burstOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3) rotate(200deg);
+    }
+}
+
+/* ==========================================================================
+   TRANSICIÓN: Contacto → Inicio
+   ========================================================================== */
+.page-transition-out {
+    animation: pageOut 0.42s ease forwards;
+}
+@keyframes pageOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.94) translateY(16px);
+        filter: blur(6px);
+    }
+}
+
+.page-transition-in {
+    animation: pageIn 0.75s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes pageIn {
+    0% {
+        opacity: 0;
+        transform: scale(1.05) translateY(-18px);
+        filter: blur(6px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
 }
