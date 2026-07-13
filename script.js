@@ -59,6 +59,32 @@ document.addEventListener('DOMContentLoaded', () => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
+
+        // Estela de estrellitas siguiendo al mouse
+        const starChars = ['✦', '✧', '★'];
+        let lastStarTime = 0;
+        const starThrottleMs = 55;
+
+        function spawnCursorStar(x, y) {
+            const star = document.createElement('span');
+            star.className = 'cursor-star';
+            star.textContent = starChars[Math.floor(Math.random() * starChars.length)];
+            star.style.left = x + 'px';
+            star.style.top = y + 'px';
+            star.style.color = Math.random() > 0.5 ? 'var(--primary)' : 'var(--secondary)';
+            const drift = (Math.random() - 0.5) * 30;
+            star.style.setProperty('--drift', drift + 'px');
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 700);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const now = performance.now();
+            if (now - lastStarTime > starThrottleMs) {
+                lastStarTime = now;
+                spawnCursorStar(e.clientX, e.clientY);
+            }
+        });
     } else {
         cursor.style.display = 'none';
     }
@@ -88,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       4. HEADER & HAMBURGER
+       3. HEADER & HAMBURGER
        ========================================================================== */
     const header = document.getElementById('header');
     const hamburger = document.getElementById('hamburger');
@@ -122,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       5. HERO CANVAS PARTICLES
+       4. HERO CANVAS PARTICLES
        ========================================================================== */
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
@@ -187,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', initCanvas);
 
     /* ==========================================================================
-       6. TYPEWRITER EFFECT
+       5. TYPEWRITER EFFECT
        ========================================================================== */
     const phrases = ["Diseñamos webs que venden.", "Diseñamos webs que impresionan.", "Diseñamos webs que crecen."];
     const typeTarget = document.getElementById('typewriter');
@@ -222,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeEffect, 1000);
 
     /* ==========================================================================
-       7. SCROLL REVEAL & STAGGER
+       6. SCROLL REVEAL & STAGGER
        ========================================================================== */
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip');
     const serviceCards = document.querySelectorAll('.service-card');
@@ -256,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       8. ANIMATED COUNTERS
+       7. ANIMATED COUNTERS
        ========================================================================== */
     const counters = document.querySelectorAll('.counter');
     let countersStarted = false;
@@ -295,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       9. TILT 3D
+       8. TILT 3D
        ========================================================================== */
     if (!isTouchDevice()) {
         const tiltCards = document.querySelectorAll('[data-tilt]');
@@ -318,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       10. FAQ ACCORDION
+       9. FAQ ACCORDION
        ========================================================================== */
     const accordionHeaders = document.querySelectorAll('.accordion-header');
     
@@ -341,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       11. WHATSAPP & CTA BUTTONS
+       10. WHATSAPP & CTA BUTTONS
        ========================================================================== */
     const waButtons = document.querySelectorAll('.wa-btn');
     
@@ -377,25 +403,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       11b. VISTA APARTE "CONTACTO"
+       10b. VISTA APARTE "CONTACTO"
        Al hacer click en cualquier enlace de Contacto, se oculta el resto del
        contenido (todo menos header/footer) y solo se ve esa sección.
        Cualquier otro enlace de ancla regresa primero a la vista normal.
+       El enlace de Contacto también funciona como URL directa: si alguien
+       entra o comparte la página con #contacto en la URL, la sección se
+       muestra automáticamente al cargar (sin necesidad de hacer clic).
        ========================================================================== */
-    function irAContacto() {
+    function irAContacto(actualizarHash = true) {
         document.body.classList.add('show-contacto');
         window.scrollTo(0, 0);
+        if (actualizarHash && window.location.hash !== '#contacto') {
+            history.pushState(null, '', '#contacto');
+        }
         gtag('event', 'click_ir_a_contacto');
     }
 
     function salirDeContacto(hash) {
         document.body.classList.remove('show-contacto');
         if (hash && hash !== '#' && hash !== '#contacto') {
+            history.replaceState(null, '', hash);
             setTimeout(() => {
                 const target = document.querySelector(hash);
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 60);
         } else {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
             window.scrollTo(0, 0);
         }
     }
@@ -408,6 +442,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Estallido de estrellitas al hacer click en "Volver al inicio"
+    function createStarBurst(x, y) {
+        const count = 16;
+        const burstChars = ['★', '✦', '✧', '✨'];
+        for (let i = 0; i < count; i++) {
+            const angle = (i / count) * Math.PI * 2 + Math.random() * 0.3;
+            const distance = 90 + Math.random() * 70;
+            const star = document.createElement('span');
+            star.className = 'burst-star';
+            star.textContent = burstChars[Math.floor(Math.random() * burstChars.length)];
+            star.style.left = x + 'px';
+            star.style.top = y + 'px';
+            star.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+            star.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
+            star.style.color = i % 2 === 0 ? 'var(--primary)' : 'var(--secondary)';
+            star.style.fontSize = (14 + Math.random() * 10) + 'px';
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 850);
+        }
+    }
+
+    // Transición especial (fade + escala + estrellas) al volver de Contacto a Inicio
+    function volverAInicioConAnimacion(hash, originEl) {
+        const contactoSection = document.getElementById('contacto');
+        const rect = originEl.getBoundingClientRect();
+        createStarBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+        contactoSection.classList.add('page-transition-out');
+
+        setTimeout(() => {
+            salirDeContacto(hash);
+            contactoSection.classList.remove('page-transition-out');
+
+            const heroSection = document.getElementById('inicio');
+            if (heroSection) {
+                heroSection.classList.add('page-transition-in');
+                setTimeout(() => heroSection.classList.remove('page-transition-in'), 750);
+            }
+        }, 420);
+    }
+
     // Cualquier otro enlace de ancla (Inicio, Servicios, Proceso, Precios, Blog,
     // "Volver al inicio" dentro de Contacto, logo, etc.) debe regresar primero
     // a la vista normal si estamos viendo la sección de Contacto aislada.
@@ -416,7 +491,12 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             if (!document.body.classList.contains('show-contacto')) return;
             e.preventDefault();
-            salirDeContacto(link.getAttribute('href'));
+            const hash = link.getAttribute('href');
+            if (link.classList.contains('back-home-link')) {
+                volverAInicioConAnimacion(hash, link);
+            } else {
+                salirDeContacto(hash);
+            }
         });
     });
 
@@ -431,8 +511,24 @@ document.addEventListener('DOMContentLoaded', () => {
         headerCtaBtn.addEventListener('click', originalHeaderCtaHandler);
     }
 
+    // Si la página se abre directamente con #contacto en la URL (enlace directo
+    // compartido por WhatsApp, redes, etc.), mostrar la sección de Contacto ya
+    // desde la primera carga.
+    if (window.location.hash === '#contacto') {
+        irAContacto(false);
+    }
+
+    // Soporta también el botón "atrás/adelante" del navegador
+    window.addEventListener('popstate', () => {
+        if (window.location.hash === '#contacto') {
+            irAContacto(false);
+        } else {
+            document.body.classList.remove('show-contacto');
+        }
+    });
+
     /* ==========================================================================
-       11c. BLOG CARDS (tracking de clics a artículos externos)
+       10c. BLOG CARDS (tracking de clics a artículos externos)
        ========================================================================== */
     const blogCards = document.querySelectorAll('.blog-card');
     blogCards.forEach(card => {
@@ -444,7 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       12. CONTACT FORM (solo existe en contacto.html)
+       11. CONTACT FORM (solo existe en contacto.html)
        ========================================================================== */
     const form = document.getElementById('contact-form');
 
@@ -479,7 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       13. SPLIT TEXT — Títulos que se revelan letra por letra
+       12. SPLIT TEXT — Títulos que se revelan letra por letra
        ========================================================================== */
     function splitTitleText(el) {
         const text = el.textContent;
@@ -509,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
     splitTargets.forEach(el => splitObserver.observe(el));
 
     /* ==========================================================================
-       14. BOTONES MAGNÉTICOS
+       13. BOTONES MAGNÉTICOS
        ========================================================================== */
     if (!isTouchDevice()) {
         const magneticEls = document.querySelectorAll('.magnetic');
@@ -527,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       15. RIPPLE EN CLICS DE BOTONES
+       14. RIPPLE EN CLICS DE BOTONES
        ========================================================================== */
     const rippleTargets = document.querySelectorAll('.btn-primary, .btn-outline, #floating-wa');
     rippleTargets.forEach(el => {
@@ -545,7 +641,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       16. PARALLAX SUAVE DEL HERO
+       15. PARALLAX SUAVE DEL HERO
        ========================================================================== */
     const heroSection = document.querySelector('.hero');
     if (heroSection) {
