@@ -85,7 +85,7 @@
 
     <header id="header">
         <div class="container header-inner">
-            <a href="#" class="logo-link" title="Inicio Zénit">
+            <a href="#inicio" class="logo-link" title="Inicio Zénit">
                 <svg class="logo-svg main-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="grad-top" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
@@ -115,11 +115,12 @@
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#proceso">Proceso</a></li>
                     <li><a href="#precios">Precios</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contacto" class="nav-contact-link">Contacto</a></li>
                 </ul>
             </nav>
 
-            <button class="btn-primary header-cta" id="header-cta">Quiero mi web</button>
+            <button class="btn-primary header-cta magnetic" id="header-cta">Quiero mi web</button>
 
             <button class="hamburger" id="hamburger" aria-label="Abrir menú">
                 <span></span>
@@ -130,6 +131,7 @@
     </header>
 
     <main>
+        <div id="main-view-a">
         <section id="inicio" class="hero">
             <canvas id="hero-canvas"></canvas>
             <div class="grid-overlay"></div>
@@ -146,10 +148,12 @@
                 <h1 class="hero-title"><span id="typewriter"></span><span class="cursor">|</span></h1>
                 <p class="hero-subtitle">Transformamos tu idea en una página web que trabaja 24/7 para hacer crecer tu negocio.</p>
                 <div class="hero-buttons">
-                    <a href="#servicios" class="btn-outline">Ver nuestro trabajo</a>
-                    <a href="#contacto" class="btn-primary glow-violet">Hablar con un experto</a>
+                    <a href="#servicios" class="btn-outline magnetic">Ver nuestro trabajo</a>
+                    <a href="#contacto" class="btn-primary glow-violet go-contact magnetic">Hablar con un experto</a>
                 </div>
             </div>
+
+            <div class="scroll-cue" aria-hidden="true"><span></span></div>
         </section>
 
         <section class="stats-bar reveal">
@@ -174,6 +178,8 @@
         </section>
 
         <section id="servicios" class="services section-pad reveal">
+            <div class="blob blob-violet blob-services-a" aria-hidden="true"></div>
+            <div class="blob blob-cyan blob-services-b" aria-hidden="true"></div>
             <div class="container">
                 <h2 class="section-title">Lo que hacemos mejor</h2>
                 <div class="services-grid">
@@ -213,8 +219,8 @@
 
         <section class="why-us section-pad reveal">
             <div class="container why-grid">
-                <div class="why-text">
-                    <h2 class="section-title left-align">No solo diseñamos webs. Construimos herramientas de ventas.</h2>
+                <div class="why-text reveal-left">
+                    <h2 class="section-title left-align">No solo diseñamos webs.        Construimos herramientas    de ventas.</h2>
                     <ul class="why-list">
                         <li><strong>Enfoque a conversión:</strong> Cada botón y espacio está pensado para que el usuario contacte o compre.</li>
                         <li><strong>Código limpio:</strong> Sin plantillas pesadas. Desarrollo a medida para máxima velocidad.</li>
@@ -223,7 +229,7 @@
                         <li><strong>Soporte real:</strong> Estamos contigo incluso después del lanzamiento.</li>
                     </ul>
                 </div>
-                <div class="why-code">
+                <div class="why-code reveal-right">
                     <div class="code-window">
                         <div class="code-header">
                             <span></span><span></span><span></span>
@@ -250,25 +256,25 @@
                         <path d="M0 2 L1200 2" stroke="url(#line-grad)" stroke-width="4" stroke-dasharray="10 10"/>
                     </svg>
                     <div class="process-grid">
-                        <div class="process-step">
+                        <div class="process-step reveal-scale">
                             <div class="step-num">1</div>
                             <div class="icon">💬</div>
                             <h3>Descubrimiento</h3>
                             <p>Nos cuentas sobre tu negocio, objetivos y referentes visuales.</p>
                         </div>
-                        <div class="process-step">
+                        <div class="process-step reveal-scale">
                             <div class="step-num">2</div>
                             <div class="icon">🎨</div>
                             <h3>Diseño UI/UX</h3>
                             <p>Creamos una propuesta visual única adaptada a tu marca.</p>
                         </div>
-                        <div class="process-step">
+                        <div class="process-step reveal-scale">
                             <div class="step-num">3</div>
                             <div class="icon">⚙️</div>
                             <h3>Desarrollo</h3>
                             <p>Programamos tu web optimizando velocidad y SEO desde el inicio.</p>
                         </div>
-                        <div class="process-step">
+                        <div class="process-step reveal-scale">
                             <div class="step-num">4</div>
                             <div class="icon">🚀</div>
                             <h3>Lanzamiento</h3>
@@ -277,7 +283,7 @@
                     </div>
                 </div>
                 <div class="process-cta">
-                    <button class="btn-primary glow-violet wa-btn" data-msg="Hola, quiero agendar mi consulta gratis para crear mi página web.">Agendar consulta gratis</button>
+                    <button class="btn-primary glow-violet wa-btn magnetic" data-msg="Hola, quiero agendar mi consulta gratis para crear mi página web.">Agendar consulta gratis</button>
                 </div>
             </div>
             <svg width="0" height="0">
@@ -291,10 +297,11 @@
         </section>
 
         <section id="precios" class="pricing section-pad reveal">
+            <div class="blob blob-violet blob-pricing-a" aria-hidden="true"></div>
             <div class="container">
                 <h2 class="section-title">Planes directos. Sin sorpresas.</h2>
                 <div class="pricing-grid">
-                    <div class="price-card basic-plan">
+                    <div class="price-card basic-plan reveal-scale">
                         <h3>PLAN BÁSICO</h3>
                         <div class="subtitle">Web Informativa Corta</div>
                         <div class="price">80$</div>
@@ -309,10 +316,10 @@
                             <li class="disabled"><span class="cross">❌</span> Blog integrado</li>
                         </ul>
                         <div class="delivery">Entrega: 7 días</div>
-                        <button class="btn-outline wa-btn" data-msg="Hola, quiero contratar el Plan Básico ($80).">Quiero el Plan Básico</button>
+                        <button class="btn-outline wa-btn magnetic" data-msg="Hola, quiero contratar el Plan Básico ($80).">Quiero el Plan Básico</button>
                     </div>
 
-                    <div class="price-card pro-plan popular">
+                    <div class="price-card pro-plan popular reveal-scale">
                         <div class="popular-badge">⭐ Más elegido</div>
                         <h3>PLAN PRO</h3>
                         <div class="subtitle">Sitio Web Corporativo Completo</div>
@@ -329,10 +336,10 @@
                             <li><span class="check">✅</span> Capacitación: Kit de Gestión PDF</li>
                         </ul>
                         <div class="delivery">Entrega: 10 días</div>
-                        <button class="btn-primary glow-violet wa-btn" data-msg="Hola, quiero contratar el Plan Pro ($200).">Quiero el Plan Pro</button>
+                        <button class="btn-primary glow-violet wa-btn magnetic" data-msg="Hola, quiero contratar el Plan Pro ($200).">Quiero el Plan Pro</button>
                     </div>
 
-                    <div class="price-card premium-plan">
+                    <div class="price-card premium-plan reveal-scale">
                         <h3>PLAN PREMIUM</h3>
                         <div class="subtitle">Todo Incluido</div>
                         <div class="price">500$</div>
@@ -346,8 +353,42 @@
                             <li><span class="check">✅</span> Capacitación: Sesión privada de estadísticas</li>
                         </ul>
                         <div class="delivery">Entrega: 14 días</div>
-                        <button class="btn-outline glow-cyan wa-btn" data-msg="Hola, quiero contratar el Plan Premium ($500).">Quiero el Plan Premium</button>
+                        <button class="btn-outline glow-cyan wa-btn magnetic" data-msg="Hola, quiero contratar el Plan Premium ($500).">Quiero el Plan Premium</button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="blog section-pad reveal">
+            <div class="blob blob-cyan blob-blog-a" aria-hidden="true"></div>
+            <div class="container">
+                <h2 class="section-title">Blog · Recursos para tu negocio</h2>
+                <p class="blog-intro">Artículos seleccionados sobre diseño web, SEO y rendimiento para que tomes mejores decisiones digitales. Al hacer clic se abren en una pestaña nueva.</p>
+                <div class="blog-grid">
+                    <a class="blog-card reveal-scale" href="https://sapyensdev.com/blog/diseno-web-profesional-guia-empresas/" target="_blank" rel="noopener noreferrer">
+                        <div class="blog-tag">Diseño Web</div>
+                        <h3>Diseño Web Profesional para Empresas: Guía Completa 2026</h3>
+                        <p>Qué diferencia una web profesional de una que solo ocupa un dominio, y los 5 criterios medibles que definen un buen proyecto web.</p>
+                        <span class="blog-link">Leer artículo →</span>
+                    </a>
+                    <a class="blog-card reveal-scale" href="https://websbarcelona.com/blog/guia-diseno-web-2026" target="_blank" rel="noopener noreferrer">
+                        <div class="blog-tag">Tendencias</div>
+                        <h3>Guía Completa Diseño Web 2026: Todo lo que Necesitas Saber</h3>
+                        <p>Tendencias visuales, Core Web Vitals, Schema Markup y cuánto tiempo real toma construir una web profesional a medida.</p>
+                        <span class="blog-link">Leer artículo →</span>
+                    </a>
+                    <a class="blog-card reveal-scale" href="https://nerade.com/blog/diseno-y-desarrollo-web-2026" target="_blank" rel="noopener noreferrer">
+                        <div class="blog-tag">SEO & Rendimiento</div>
+                        <h3>Diseño y Desarrollo Web en 2026: la guía esencial</h3>
+                        <p>Por qué la velocidad, la accesibilidad y las microinteracciones inteligentes marcan la diferencia frente a una web genérica.</p>
+                        <span class="blog-link">Leer artículo →</span>
+                    </a>
+                    <a class="blog-card reveal-scale" href="https://mailchimp.com/es/resources/small-business-website-design-tips/" target="_blank" rel="noopener noreferrer">
+                        <div class="blog-tag">Pymes</div>
+                        <h3>Diseño web para pequeñas empresas: Guía paso a paso</h3>
+                        <p>Consejos prácticos de branding, espacio en blanco y velocidad de carga aplicados a negocios pequeños.</p>
+                        <span class="blog-link">Leer artículo →</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -389,9 +430,10 @@
                     <div class="accordion-item">
                         <button class="accordion-header">¿Con qué frecuencia se realizan actualizaciones o cambios en la página web? <span class="acc-icon">+</span></button>
                         <div class="accordion-body">
-                            <p>Se realizan las actualizaciones los días sádabo o domingo. Envíame todos los cambios que necesites durante la semana y los aplico todos juntos en una sola sesión.</p>
+                            <p>Se realizan las actualizaciones los días sábado o domingo. Envíame todos los cambios que necesites durante la semana y los aplico todos juntos en una sola sesión.</p>
                         </div>
-                        <div class="accordion-item">
+                    </div>
+                    <div class="accordion-item">
                         <button class="accordion-header">¿Qué es el SEO? <span class="acc-icon">+</span></button>
                         <div class="accordion-body">
                             <p>SEO (Search Engine Optimization) es el conjunto de técnicas que hacen que tu web aparezca en los primeros resultados de Google cuando alguien busca lo que tú ofreces, sin pagar por publicidad. Incluye velocidad de carga, estructura del contenido, palabras clave y experiencia de usuario.</p>
@@ -409,10 +451,11 @@
                             <p>Es una herramienta que mide el comportamiento de los visitantes en tu web: cuántas personas entran, desde dónde llegan (redes sociales, Google, links directos), qué páginas visitan más y cuánto tiempo permanecen. Te ayuda a tomar decisiones basadas en datos reales.</p>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
         </section>
+
+        </div>
 
         <section id="contacto" class="contact section-pad reveal">
             <div class="container contact-grid">
@@ -420,7 +463,7 @@
                     <h2 class="section-title left-align">Hablemos de tu proyecto</h2>
                     <p>Déjanos tus datos y nos pondremos en contacto contigo lo antes posible para transformar tu idea en una web que vende.</p>
                     
-                    <button class="btn-primary bg-green wa-btn" data-msg="Hola, quiero información sobre el desarrollo de una web.">
+                    <button class="btn-primary bg-green wa-btn magnetic" data-msg="Hola, quiero información sobre el desarrollo de una web.">
                         <svg class="wa-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                         </svg>
@@ -437,6 +480,11 @@
                             <span>zenit.corex@gmail.com</span>
                         </div>
                     </div>
+
+                    <a href="#inicio" class="btn-outline back-home-link magnetic">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Volver al inicio
+                    </a>
                 </div>
                 <div class="contact-form-wrapper">
                     <form id="contact-form">
@@ -461,7 +509,7 @@
                                     <option value="" disabled selected>Selecciona una opción</option>
                                     <option value="Web Informativa">Web Informativa</option>
                                     <option value="Web Corporativa">Web Corporativa</option>
-                                    <option value="Web Corporativa">Mantenimiento</option>
+                                    <option value="Mantenimiento">Mantenimiento</option>
                                     <option value="Otro">Otro</option>
                                 </select>
                             </div>
@@ -487,6 +535,7 @@
             </div>
         </section>
 
+        <div id="main-view-b">
         <section class="final-cta">
             <div class="gradient-mesh"></div>
             <div class="floating-code low-op">
@@ -499,17 +548,18 @@
                 <h2>¿Listo para tener la web que tu negocio merece?</h2>
                 <p>Deja de perder clientes por no tener presencia digital o por tener una web anticuada.</p>
                 <div class="hero-buttons center-flex">
-                    <button class="btn-primary glow-cyan wa-btn" data-msg="Hola, estoy listo para iniciar mi proyecto web.">Comenzar ahora</button>
-                    <a href="#precios" class="btn-outline">Ver planes</a>
+                    <button class="btn-primary glow-cyan wa-btn magnetic" data-msg="Hola, estoy listo para iniciar mi proyecto web.">Comenzar ahora</button>
+                    <a href="#precios" class="btn-outline magnetic">Ver planes</a>
                 </div>
             </div>
         </section>
+        </div>
     </main>
 
     <footer id="footer">
         <div class="container footer-grid">
             <div class="footer-col brand-col">
-                <a href="#" class="logo-link">
+                <a href="#inicio" class="logo-link">
                     <svg class="logo-svg main-svg" width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <linearGradient id="grad-top-f" x1="0" y1="0" x2="40" y2="0" gradientUnits="userSpaceOnUse">
@@ -543,9 +593,11 @@
             <div class="footer-col">
                 <h4>Empresa</h4>
                 <ul>
-                    <li><a href="#servicio">Servicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#proceso">Proceso</a></li>
                     <li><a href="#precios">Precios</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contacto" class="go-contact">Contacto</a></li>
                 </ul>
             </div>
             <div class="footer-col contact-col">
