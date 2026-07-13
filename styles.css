@@ -23,24 +23,9 @@
     --border-radius: 16px;
     --transition: all 0.3s ease;
 
-    /* ======================================================================
-       🔧 ZONA EDITABLE MANUALMENTE #1: COLOR DE LAS LETRAS "Z" Y "T" DEL LOGO
-       Cambia estos dos valores para ajustar el color de la Z y la T de "ZÉNIT"
-       ====================================================================== */
     --logo-z-color: #6C63FF;
     --logo-t-color: #6C63FF;
-
-    /* ======================================================================
-       🔧 ZONA EDITABLE MANUALMENTE #2: ANCHO DE LAS TARJETAS DE ESPECIALIDADES
-       Baja el % si querés tarjetas más angostas, subilo si las querés más anchas.
-       Con 31% quedan 3 tarjetas arriba y 2 centradas abajo automáticamente.
-       ====================================================================== */
     --service-card-width: 31%;
-
-    /* ======================================================================
-       🔧 ZONA EDITABLE MANUALMENTE #3: SEPARACIÓN DEL BOTÓN "AGENDAR CONSULTA GRATIS"
-       Ajustá el margen superior del botón centrado en la sección de Proceso.
-       ====================================================================== */
     --process-cta-margin-top: 3rem;
 }
 
@@ -53,6 +38,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    scroll-padding-top: 90px;
 }
 
 body {
@@ -64,13 +50,11 @@ body {
     position: relative;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-main); }
 ::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-/* Typography */
 h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
 h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 1rem; }
 h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 2rem; text-align: center; }
@@ -79,7 +63,6 @@ p { font-size: clamp(0.9rem, 1.2vw, 1.1rem); color: var(--text-soft); }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 ul { list-style: none; }
 
-/* Layout Utils */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -89,7 +72,6 @@ ul { list-style: none; }
 .center-flex { display: flex; justify-content: center; align-items: center; gap: 1rem; }
 .left-align { text-align: left; }
 
-/* Custom Alignment specific requirement */
 .icon-aligned {
     display: inline-flex;
     align-items: center;
@@ -99,9 +81,6 @@ ul { list-style: none; }
     transform: translateY(-1px);
 }
 
-/* ==========================================================================
-   LOADER & CURSOR & PROGRESS
-   ========================================================================== */
 #loader {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -145,9 +124,6 @@ ul { list-style: none; }
     z-index: 10000;
 }
 
-/* ==========================================================================
-   HEADER & NAVIGATION
-   ========================================================================== */
 header {
     position: fixed; top: 0; left: 0; width: 100%;
     padding: 1rem 0; z-index: 1000;
@@ -167,16 +143,6 @@ header.scrolled {
 .gradient-text { background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .tagline { font-family: var(--font-code); font-size: 0.6rem; color: var(--secondary); opacity: 0.7; }
 
-/* ==========================================================================
-   🔧 ZONA EDITABLE MANUALMENTE #1 (continuación): LETRAS "Z" Y "T" DEL LOGO
-   Estas clases deben estar puestas en el HTML alrededor de la Z y la T así:
-   <span class="logo-text">
-     <span class="logo-letter-z">Z</span><span class="gradient-text">ÉNI</span><span class="logo-letter-t">T</span>
-   </span>
-   IMPORTANTE: estas reglas van DESPUÉS de .gradient-text para que no se
-   sobreescriban, y usan color sólido (NO background-clip) para que no
-   hereden el efecto de gradiente transparente.
-   ========================================================================== */
 .logo-letter-z,
 .logo-letter-t {
     -webkit-background-clip: initial;
@@ -186,7 +152,6 @@ header.scrolled {
 .logo-letter-z { color: var(--logo-z-color); }
 .logo-letter-t { color: var(--logo-t-color); }
 
-/* Menu Centrado */
 nav { flex: 1; display: flex; justify-content: center; }
 nav ul { display: flex; gap: 2rem; justify-content: center; }
 nav a { font-size: 0.9rem; font-weight: 500; position: relative; padding: 0.5rem 0; }
@@ -222,7 +187,6 @@ nav a:hover::after { width: 100%; }
 .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
 .hamburger span { width: 25px; height: 2px; background: var(--text-main); transition: var(--transition); }
 
-/* Logo Animation (Draw on load) */
 .main-svg .z-line { stroke-dasharray: 60; stroke-dashoffset: 60; }
 .loaded .main-svg .z-line { animation: drawLogo 1s ease forwards; }
 @keyframes drawLogo { to { stroke-dashoffset: 0; } }
@@ -230,9 +194,6 @@ nav a:hover::after { width: 100%; }
 .pulse-dot { animation: pulseDot 2s infinite alternate; }
 @keyframes pulseDot { from { opacity: 0.5; r: 2; } to { opacity: 1; r: 4; } }
 
-/* ==========================================================================
-   HERO
-   ========================================================================== */
 .hero {
     position: relative; height: 100vh; min-height: 600px;
     display: flex; align-items: center; justify-content: center;
@@ -271,7 +232,7 @@ nav a:hover::after { width: 100%; }
     background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px; font-size: 0.8rem; font-family: var(--font-code);
 }
-.hero-title { min-height: 2.4em; } /* Space for typewriter */
+.hero-title { min-height: 2.4em; }
 .cursor { animation: blink 1s infinite; color: var(--primary); }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 .hero-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: 2.5rem; }
@@ -281,25 +242,13 @@ nav a:hover::after { width: 100%; }
     justify-content: center;
     flex-wrap: wrap;
 }
-/* ==========================================================================
-   STATS BAR
-   ========================================================================== */
+
 .stats-bar { background: var(--bg-card); padding: 3rem 0; border-top: 2px solid; border-image: linear-gradient(90deg, var(--primary), var(--secondary)) 1; }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
 .stat-item h3 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
 
-/* ==========================================================================
-   SERVICES (ESPECIALIDADES)
-   ========================================================================== */
 .services { background: var(--bg-sec); }
 
-/* ======================================================================
-   🔧 ZONA EDITABLE MANUALMENTE #2 (continuación): ESTRUCTURA 3 + 2 CENTRADAS
-   Ya no depende de nth-child ni de grid-column. Con flexbox + justify-content:
-   center, las 5 tarjetas se acomodan solas: 3 arriba y 2 centradas abajo.
-   Si querés forzar manualmente el ancho de cada tarjeta, editá
-   --service-card-width en el :root de arriba (ej: 31%, 30%, 28%...).
-   ====================================================================== */
 .services-grid {
     display: flex;
     flex-wrap: wrap;
@@ -322,9 +271,6 @@ nav a:hover::after { width: 100%; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .tags span { font-family: var(--font-code); font-size: 0.7rem; color: var(--secondary); background: rgba(0, 217, 255, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; }
 
-/* ==========================================================================
-   WHY US
-   ========================================================================== */
 .why-us { background: var(--bg-sec); }
 .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .why-list li { margin-bottom: 1.5rem; position: relative; padding-left: 2rem; }
@@ -345,9 +291,6 @@ nav a:hover::after { width: 100%; }
 .keyword { color: #c678dd; } .variable { color: #e5c07b; } .property { color: #e06c75; }
 .string { color: #98c379; } .method { color: #61afef; } .comment { color: #5c6370; font-style: italic; }
 
-/* ==========================================================================
-   PROCESS
-   ========================================================================== */
 .process-wrapper { position: relative; padding: 4rem 0; margin-bottom: 3rem; }
 .process-line { position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 0; }
 .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; position: relative; z-index: 1; }
@@ -360,21 +303,12 @@ nav a:hover::after { width: 100%; }
 }
 .process-step .icon { font-size: 2rem; margin-bottom: 1rem; }
 
-/* ======================================================================
-   🔧 ZONA EDITABLE MANUALMENTE #3 (continuación): CENTRAR "AGENDAR CONSULTA GRATIS"
-   En el HTML, envolvé el botón así:
-   <div class="process-cta"><a href="..." class="btn-primary glow-violet">Agendar consulta gratis</a></div>
-   Ajustá el espacio de arriba con --process-cta-margin-top en el :root.
-   ====================================================================== */
 .process-cta {
     display: flex;
     justify-content: center;
     margin-top: var(--process-cta-margin-top);
 }
 
-/* ==========================================================================
-   PRICING
-   ========================================================================== */
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; align-items: center; }
 .price-card {
     background: var(--bg-card); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -399,6 +333,55 @@ nav a:hover::after { width: 100%; }
 .delivery { font-size: 0.8rem; text-align: center; margin-bottom: 1.5rem; font-family: var(--font-code); color: var(--text-soft); }
 
 /* ==========================================================================
+   BLOG
+   ========================================================================== */
+.blog { background: var(--bg-sec); }
+.blog-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: -1rem auto 3rem;
+}
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+.blog-card {
+    background: rgba(19, 19, 31, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    cursor: pointer;
+}
+.blog-card:hover {
+    border-color: var(--secondary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: translateY(-4px);
+}
+.blog-tag {
+    align-self: flex-start;
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    color: var(--primary);
+    background: rgba(108, 99, 255, 0.12);
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+.blog-card h3 { font-size: 1.15rem; margin-bottom: 0.8rem; }
+.blog-card p { flex-grow: 1; margin-bottom: 1.2rem; font-size: 0.95rem; }
+.blog-link {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--secondary);
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
    FAQ
    ========================================================================== */
 .faq { background: var(--bg-sec); }
@@ -418,6 +401,7 @@ nav a:hover::after { width: 100%; }
 /* ==========================================================================
    CONTACT
    ========================================================================== */
+.contact { background: var(--bg-sec); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .contact-info p { margin-bottom: 2rem; }
 .contact-details { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; }
@@ -435,7 +419,6 @@ input, select, textarea {
     transition: border-color 0.3s ease;
 }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); }
-/* Specific fix for select options text color */
 select option { color: #0A0A0F; background: #FFF; }
 .error-msg { color: #ff5f56; font-size: 0.8rem; position: absolute; bottom: -20px; left: 0; display: none; }
 input:invalid:not(:placeholder-shown) ~ .error-msg,
@@ -443,8 +426,22 @@ textarea:invalid:not(:placeholder-shown) ~ .error-msg { display: block; }
 .w-100 { width: 100%; }
 
 /* ==========================================================================
-   FINAL CTA
+   CONTACT PAGE HERO (contacto.html)
    ========================================================================== */
+.contact-page-hero {
+    padding: 160px 0 40px;
+    text-align: center;
+}
+.contact-page-hero .eyebrow { margin-bottom: 1.5rem; }
+.back-home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+.back-home-link svg { transition: transform 0.3s ease; }
+.back-home-link:hover svg { transform: translateX(-4px); }
+
 .final-cta { position: relative; padding: 6rem 0; text-align: center; overflow: hidden; }
 .gradient-mesh {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
@@ -457,9 +454,6 @@ textarea:invalid:not(:placeholder-shown) ~ .error-msg { display: block; }
 .float-icon { font-size: 3rem; margin-bottom: 1rem; animation: floatAnim 4s infinite ease-in-out; }
 .cta-content p { margin-bottom: 2rem; font-size: 1.2rem; }
 
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
 footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid; border-image: linear-gradient(90deg, var(--primary), var(--secondary)) 1; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
 .brand-col .logo-link { margin-bottom: 1rem; }
@@ -471,9 +465,6 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
 .contact-col .detail-item { margin-bottom: 1rem; font-size: 0.9rem; }
 .footer-bottom { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.05); color: var(--text-soft); font-size: 0.8rem; }
 
-/* ==========================================================================
-   FLOATING WHATSAPP
-   ========================================================================== */
 #floating-wa {
     position: fixed; bottom: 30px; right: 30px;
     width: 60px; height: 60px; background: #25D366;
@@ -489,40 +480,323 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
     100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
-/* ==========================================================================
-   ANIMATIONS & UTILS (Scroll Reveal)
-   ========================================================================== */
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   RESPONSIVE (Media Queries)
+   VISTA APARTE: CONTACTO
+   La sección de Contacto queda oculta durante el scroll normal de la página.
+   Solo se muestra cuando el usuario hace clic en un enlace "Contacto"
+   (nav, footer, botón del hero), lo cual oculta el resto del contenido y
+   revela únicamente esta sección (header y footer se mantienen visibles).
    ========================================================================== */
-/* 1440px */
+#contacto {
+    display: none;
+}
+
+body.show-contacto #main-view-a,
+body.show-contacto #main-view-b {
+    display: none;
+}
+body.show-contacto #contacto {
+    display: block;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* ==========================================================================
+   ANIMACIONES AVANZADAS
+   ========================================================================== */
+
+/* --- Revelados de scroll con dirección/variante --- */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.82);
+    transition: opacity 0.7s cubic-bezier(.34,1.56,.64,1), transform 0.7s cubic-bezier(.34,1.56,.64,1);
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+.reveal-flip {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-25deg);
+    transform-origin: top center;
+    transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal-flip.visible { opacity: 1; transform: perspective(800px) rotateX(0deg); }
+
+/* Stagger para grids de tarjetas */
+.process-step:nth-child(1) { transition-delay: 0s; }
+.process-step:nth-child(2) { transition-delay: 0.12s; }
+.process-step:nth-child(3) { transition-delay: 0.24s; }
+.process-step:nth-child(4) { transition-delay: 0.36s; }
+
+.price-card:nth-child(1) { transition-delay: 0s; }
+.price-card:nth-child(2) { transition-delay: 0.15s; }
+.price-card:nth-child(3) { transition-delay: 0.3s; }
+
+.blog-card:nth-child(1) { transition-delay: 0s; }
+.blog-card:nth-child(2) { transition-delay: 0.1s; }
+.blog-card:nth-child(3) { transition-delay: 0.2s; }
+.blog-card:nth-child(4) { transition-delay: 0.3s; }
+
+/* --- Títulos: revelado letra por letra --- */
+.section-title {
+    position: relative;
+}
+.split-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(45px) rotateZ(8deg);
+    transition: opacity 0.5s cubic-bezier(.2,.8,.2,1), transform 0.6s cubic-bezier(.2,.8,.2,1);
+    transition-delay: calc(var(--i, 0) * 22ms);
+}
+.split-ready .split-char { opacity: 1; transform: translateY(0) rotateZ(0deg); }
+
+/* Subrayado animado bajo los títulos */
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    width: 70px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    transition: transform 0.7s cubic-bezier(.2,.8,.2,1) 0.3s;
+}
+.split-ready.section-title::after,
+.section-title.split-ready::after { transform: translateX(-50%) scaleX(1); }
+
+.section-title.left-align::after {
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+.section-title.left-align.split-ready::after { transform: scaleX(1); }
+
+/* --- Botones magnéticos --- */
+.magnetic {
+    transition: transform 0.25s cubic-bezier(.2,.9,.3,1);
+    will-change: transform;
+}
+.btn-primary:active, .btn-outline:active { transform: scale(0.95); }
+
+/* --- Ripple al hacer clic --- */
+.btn-outline { position: relative; overflow: hidden; }
+#floating-wa { overflow: hidden; }
+.ripple-span {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    transform: scale(0);
+    animation: rippleAnim 0.65s ease-out;
+    pointer-events: none;
+}
+@keyframes rippleAnim {
+    to { transform: scale(3); opacity: 0; }
+}
+
+/* --- Efecto shine/sweep en tarjetas --- */
+.service-card, .blog-card {
+    position: relative;
+    overflow: hidden;
+}
+.service-card::before,
+.price-card::before,
+.blog-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -160%;
+    width: 55%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+.service-card:hover::before,
+.price-card:hover::before,
+.blog-card:hover::before {
+    left: 160%;
+}
+
+/* --- Textos con gradiente animado (shimmer) --- */
+.gradient-text {
+    background-size: 200% auto;
+    animation: gradientShift 5s ease infinite;
+}
+.stat-item h3 {
+    background-size: 200% auto;
+    animation: gradientShift 5s ease infinite;
+}
+@keyframes gradientShift {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+/* --- Glitch en el logo al hacer hover --- */
+.logo-link:hover .gradient-text {
+    animation: gradientShift 5s ease infinite, glitchText 0.4s steps(3) 1;
+}
+@keyframes glitchText {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+    100% { transform: translate(0); }
+}
+
+/* --- Blobs de fondo animados (morphing) --- */
+.services, .pricing, .blog {
+    position: relative;
+    overflow: hidden;
+}
+.blob {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 45% 55% 60% 40% / 45% 40% 60% 55%;
+    filter: blur(70px);
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+    animation: blobMove 16s ease-in-out infinite, blobMorph 11s ease-in-out infinite;
+}
+.blob-violet { background: var(--primary); }
+.blob-cyan { background: var(--secondary); }
+.blob-services-a { top: -120px; left: -100px; }
+.blob-services-b { bottom: -140px; right: -100px; animation-delay: -6s; }
+.blob-pricing-a { top: -100px; right: -120px; }
+.blob-blog-a { bottom: -160px; left: -80px; }
+
+.services .container, .pricing .container, .blog .container {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes blobMove {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(40px, -50px) scale(1.1); }
+    66% { transform: translate(-30px, 35px) scale(0.92); }
+}
+@keyframes blobMorph {
+    0%, 100% { border-radius: 45% 55% 60% 40% / 45% 40% 60% 55%; }
+    50% { border-radius: 60% 40% 45% 55% / 55% 60% 40% 45%; }
+}
+
+/* --- Indicador de scroll animado en el hero --- */
+.scroll-cue {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    z-index: 3;
+}
+.scroll-cue span {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    background: var(--secondary);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    animation: scrollCueAnim 1.6s infinite;
+}
+@keyframes scrollCueAnim {
+    0% { opacity: 1; top: 8px; }
+    70% { opacity: 0; top: 24px; }
+    100% { opacity: 0; top: 8px; }
+}
+
+/* --- Brillo pulsante en el eyebrow del hero --- */
+.eyebrow {
+    animation: eyebrowGlow 3s ease-in-out infinite;
+}
+@keyframes eyebrowGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(108, 99, 255, 0); }
+    50% { box-shadow: 0 0 20px rgba(108, 99, 255, 0.3); }
+}
+
+/* --- Parallax suave del hero --- */
+.grid-overlay { transform: translateY(calc(var(--scrollY, 0) * 0.12px)); }
+.floating-code { transform: translateY(calc(var(--scrollY, 0) * 0.06px)); }
+
+/* --- Stat cards: pequeño lift al hover --- */
+.stat-item { transition: transform 0.3s ease; }
+.stat-item:hover { transform: translateY(-8px); }
+
+/* --- Inputs con foco más vivo --- */
+input:focus, select:focus, textarea:focus {
+    transform: scale(1.01);
+    box-shadow: 0 0 15px rgba(108, 99, 255, 0.18);
+}
+
+/* --- Contenido del acordeón: fade suave al abrir --- */
+.accordion-body p {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+}
+.accordion-header.active + .accordion-body p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Accesibilidad: respetar reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+    .magnetic { transform: none !important; }
+}
+
 @media (max-width: 1440px) {
     .container { width: 95%; }
 }
 
-/* 1280px */
 @media (max-width: 1280px) {
     .hero-title { font-size: clamp(2rem, 4vw, 3.5rem); }
 }
 
-/* 1024px */
 @media (max-width: 1024px) {
     .service-card { flex-basis: 45%; }
     .contact-grid { gap: 2rem; }
 }
 
-/* 900px */
 @media (max-width: 900px) {
     .pricing-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
     .pro-plan { transform: scale(1); }
     .pro-plan:hover { transform: scale(1.02); }
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .blog-grid { grid-template-columns: 1fr; }
 }
 
-/* 768px */
 @media (max-width: 768px) {
     #main-nav {
         position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
@@ -542,14 +816,16 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
     .why-grid { grid-template-columns: 1fr; }
     .why-code { display: none; }
     
-    .process-line { display: none; } /* Desktop horizontal line off */
+    .process-line { display: none; }
     .process-wrapper { padding-left: 20px; }
     .process-grid { grid-template-columns: 1fr; gap: 2rem; }
     .process-step { display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding: 1.5rem; }
     
     .contact-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
-    
+
+    .blob { width: 220px; height: 220px; filter: blur(40px); opacity: 0.18; }
+
    .hero-buttons {
     display: flex;
     flex-direction: column;
@@ -566,8 +842,8 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
     text-align: center;
     box-sizing: border-box;
 }
+}
 
-/* 600px */
 @media (max-width: 600px) {
     .service-card { flex-basis: 100%; }
     .footer-grid { grid-template-columns: 1fr; text-align: center; }
@@ -577,7 +853,6 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
     .stats-grid { grid-template-columns: 1fr; }
 }
 
-/* 430px & 375px & 320px */
 @media (max-width: 480px) {
     .section-pad { padding: 60px 0; }
     .contact-form-wrapper { padding: 1.5rem; }
@@ -589,7 +864,6 @@ footer { background: var(--bg-footer); padding: 4rem 0 0; border-top: 2px solid;
     h1 { font-size: 1.8rem; }
 }
 
-/* Touch Device Optimizations */
 @media (hover: none) and (pointer: coarse) {
     #custom-cursor { display: none !important; }
 }
