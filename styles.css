@@ -636,6 +636,63 @@ body.show-contacto #contacto {
 .blog-card:hover::before {
     left: 160%;
 }
+/* ==========================================================================
+   PLAN PROMOCIÓN (nuevo, con badge NEW titilando)
+   ========================================================================== */
+.pricing-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.promo-plan {
+    border-color: var(--secondary);
+}
+
+.new-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--secondary);
+    color: var(--bg-main);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    white-space: nowrap;
+    animation: newBadgeBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes newBadgeBlink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 10px rgba(0, 217, 255, 0.6); }
+    50% { opacity: 0.4; box-shadow: 0 0 0 rgba(0, 217, 255, 0); }
+}
+
+.promo-note {
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.promo-counter {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    background: rgba(0, 217, 255, 0.1);
+    border: 1px solid rgba(0, 217, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.4rem 0;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* --- Textos con gradiente animado (shimmer) --- */
 .gradient-text {
