@@ -404,12 +404,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
        10b. VISTA APARTE "CONTACTO"
-       Al hacer click en cualquier enlace de Contacto, se oculta el resto del
-       contenido (todo menos header/footer) y solo se ve esa sección.
-       Cualquier otro enlace de ancla regresa primero a la vista normal.
-       El enlace de Contacto también funciona como URL directa: si alguien
-       entra o comparte la página con #contacto en la URL, la sección se
-       muestra automáticamente al cargar (sin necesidad de hacer clic).
        ========================================================================== */
     function irAContacto(actualizarHash = true) {
         document.body.classList.add('show-contacto');
@@ -483,9 +477,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 420);
     }
 
-    // Cualquier otro enlace de ancla (Inicio, Servicios, Proceso, Precios, Blog,
-    // "Volver al inicio" dentro de Contacto, logo, etc.) debe regresar primero
-    // a la vista normal si estamos viendo la sección de Contacto aislada.
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         if (link.matches('a[href="#contacto"], .go-contact, .nav-contact-link')) return;
         link.addEventListener('click', (e) => {
@@ -500,7 +491,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // El botón "Quiero mi web" del header también debe salir de la vista de Contacto
     const headerCtaBtn = document.getElementById('header-cta');
     if (headerCtaBtn) {
         const originalHeaderCtaHandler = () => {
@@ -511,14 +501,10 @@ document.addEventListener('DOMContentLoaded', () => {
         headerCtaBtn.addEventListener('click', originalHeaderCtaHandler);
     }
 
-    // Si la página se abre directamente con #contacto en la URL (enlace directo
-    // compartido por WhatsApp, redes, etc.), mostrar la sección de Contacto ya
-    // desde la primera carga.
     if (window.location.hash === '#contacto') {
         irAContacto(false);
     }
 
-    // Soporta también el botón "atrás/adelante" del navegador
     window.addEventListener('popstate', () => {
         if (window.location.hash === '#contacto') {
             irAContacto(false);
@@ -540,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       11. CONTACT FORM (solo existe en contacto.html)
+       11. CONTACT FORM
        ========================================================================== */
     const form = document.getElementById('contact-form');
 
@@ -578,15 +564,21 @@ document.addEventListener('DOMContentLoaded', () => {
        12. SPLIT TEXT — Títulos que se revelan letra por letra
        ========================================================================== */
     function splitTitleText(el) {
-        const text = el.textContent;
+        const originalText = el.textContent;
+        const nodes = Array.from(el.childNodes);
         el.textContent = '';
-        el.setAttribute('aria-label', text);
-        [...text].forEach((char, i) => {
-            const span = document.createElement('span');
-            span.className = 'split-char';
-            span.style.setProperty('--i', i);
-            span.textContent = char === ' ' ? '\u00A0' : char;
-            el.appendChild(span);
+        el.setAttribute('aria-label', originalText);
+        let i = 0;
+        nodes.forEach(node => {
+            const text = node.textContent;
+            const extraClass = node.nodeType === 1 ? node.className : '';
+            [...text].forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'split-char' + (extraClass ? ' ' + extraClass : '');
+                span.style.setProperty('--i', i++);
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                el.appendChild(span);
+            });
         });
     }
 
@@ -651,5 +643,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.style.setProperty('--scrollY', scrollY);
             }
         }, { passive: true });
+    }
+
+    /* ==========================================================================
+       16. BARRA DE NAVEGACIÓN INFERIOR (SOLO MÓVIL)
+       Marca el ícono activo según la sección visible en pantalla, y también
+       al hacer clic (para respuesta inmediata antes de que termine el scroll).
+       ========================================================================== */
+    const mobileNavItems = document.querySelectorAll('.mnav-item');
+    const mobileNavSectionIds = ['inicio', 'servicios', 'proceso', 'precios', 'pagos'];
+    const mobileNavSections = mobileNavSectionIds
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+    function setActiveMobileNav(targetId) {
+        mobileNavItems.forEach(item => {
+            item.classList.toggle('active', item.getAttribute('data-target') === targetId);
+        });
+    }
+
+    // Estado activo inicial
+    setActiveMobileNav('inicio');
+
+    // Respuesta inmediata al tocar un ítem
+    mobileNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            setActiveMobileNav(item.getAttribute('data-target'));
+        });
+    });
+
+    // Actualiza el ítem activo según la sección visible al hacer scroll
+    // Cuando se activa la vista de Contacto (por cualquier vía), marcar su ícono
+    document.querySelectorAll('a[href="#contacto"], .go-contact, .nav-contact-link').forEach(el => {
+        el.addEventListener('click', () => setActiveMobileNav('contacto'));
+    });
+    if (window.location.hash === '#contacto') setActiveMobileNav('contacto');
+
+    if (mobileNavSections.length && 'IntersectionObserver' in window) {
+        const mobileNavObserver = new IntersectionObserver((entries) => {
+            // Si el usuario está viendo la vista aislada de Contacto, no tocar la barra
+            if (document.body.classList.contains('show-contacto')) return;
+
+            let mostVisible = null;
+            let maxRatio = 0;
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > maxRatio) {
+                    maxRatio = entry.intersectionRatio;
+                    mostVisible = entry.target;
+                }
+            });
+            if (mostVisible && maxRatio > 0) {
+                setActiveMobileNav(mostVisible.id);
+            }
+        }, { threshold: [0.2, 0.35, 0.5, 0.65, 0.8] });
+
+        mobileNavSections.forEach(section => mobileNavObserver.observe(section));
     }
 });
