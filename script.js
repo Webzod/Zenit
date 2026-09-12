@@ -114,36 +114,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================================================
-       3. HEADER & HAMBURGER
+       3. HEADER
        ========================================================================== */
     const header = document.getElementById('header');
-    const hamburger = document.getElementById('hamburger');
-    const mainNav = document.getElementById('main-nav');
-    const navLinks = document.querySelectorAll('#main-nav a');
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 60) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
-        }
-    });
-
-    function toggleMenu() {
-        hamburger.classList.toggle('open');
-        mainNav.classList.toggle('open');
-    }
-
-    hamburger.addEventListener('click', toggleMenu);
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mainNav.classList.contains('open')) toggleMenu();
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        if (mainNav.classList.contains('open') && !e.target.closest('#main-nav') && !e.target.closest('#hamburger')) {
-            toggleMenu();
         }
     });
 
