@@ -126,7 +126,9 @@ ul { list-style: none; }
 
 header {
     position: fixed; top: 0; left: 0; width: 100%;
-    padding: 1rem 0; z-index: 1000;
+    padding: 1rem 0;
+    padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+    z-index: 1000;
     transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 header.scrolled {
@@ -134,14 +136,21 @@ header.scrolled {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+/* La vista aislada de Contacto siempre debe verse por delante del header
+   con fondo sólido: evita que el logo se mezcle visualmente con el título */
+body.show-contacto header {
+    background: rgba(10, 10, 15, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 .header-inner {
     display: flex; justify-content: space-between; align-items: center;
 }
-.logo-link { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
-.logo-text-wrapper { display: flex; flex-direction: column; }
-.logo-text { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; letter-spacing: 0.2em; }
+.logo-link { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; flex-wrap: nowrap; }
+.logo-text-wrapper { display: flex; flex-direction: column; flex-shrink: 0; }
+.logo-text { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; letter-spacing: 0.2em; white-space: nowrap; }
 .gradient-text { background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.tagline { font-family: var(--font-code); font-size: 0.6rem; color: var(--secondary); opacity: 0.7; }
+.tagline { font-family: var(--font-code); font-size: 0.6rem; color: var(--secondary); opacity: 0.7; white-space: nowrap; }
 
 .logo-letter-z,
 .logo-letter-t {
@@ -184,8 +193,7 @@ nav a:hover::after { width: 100%; }
 }
 .btn-outline:hover { box-shadow: var(--glow-cyan); background: rgba(0, 217, 255, 0.1); }
 
-.hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
-.hamburger span { width: 25px; height: 2px; background: var(--text-main); transition: var(--transition); }
+.header-cta { display: block; }
 
 .main-svg .z-line { stroke-dasharray: 60; stroke-dashoffset: 60; }
 .loaded .main-svg .z-line { animation: drawLogo 1s ease forwards; }
@@ -448,6 +456,12 @@ nav a:hover::after { width: 100%; }
    CONTACT
    ========================================================================== */
 .contact { background: var(--bg-sec); }
+/* #contacto es siempre la vista superior aislada de la página (ver body.show-contacto),
+   así que su padding-top debe ser mayor que la altura real del header fijo en cada
+   tamaño de pantalla, o el título queda tapado/mezclado con el logo. */
+#contacto.contact {
+    padding-top: calc(140px + env(safe-area-inset-top, 0px));
+}
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .contact-info p { margin-bottom: 2rem; }
 .contact-details { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; }
@@ -820,18 +834,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 @media (max-width: 768px) {
-    #main-nav {
-        position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
-        background: var(--bg-card); flex-direction: column; justify-content: center;
-        transition: right 0.3s ease; border-left: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 2rem;
-    }
-    #main-nav.open { right: 0; }
-    #main-nav ul { flex-direction: column; align-items: center; gap: 2rem; }
-    .hamburger { display: flex; }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    #main-nav { display: none; }
     .header-cta { display: none; }
     
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -845,6 +848,8 @@ input:focus, select:focus, textarea:focus {
     
     .contact-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
+
+    #contacto.contact { padding-top: calc(110px + env(safe-area-inset-top, 0px)); }
 
     .blob { width: 220px; height: 220px; filter: blur(40px); opacity: 0.18; }
 
@@ -880,6 +885,7 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 480px) {
     .section-pad { padding: 60px 0; }
     .contact-form-wrapper { padding: 1.5rem; }
+    #contacto.contact { padding-top: calc(100px + env(safe-area-inset-top, 0px)); }
 }
 
 @media (max-width: 320px) {
@@ -1073,11 +1079,13 @@ input:focus, select:focus, textarea:focus {
         transform: translateX(-50%);
         width: calc(100% - 20px);
         max-width: 520px;
-        background: #FFFFFF;
+        background: rgba(15, 15, 26, 0.92);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 999px;
         padding: 10px 4px;
         padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
         z-index: 1500;
         gap: 2px;
     }
@@ -1091,7 +1099,7 @@ input:focus, select:focus, textarea:focus {
         gap: 4px;
         padding: 6px 2px 8px;
         border-radius: 16px;
-        color: #8A93A6;
+        color: var(--text-soft);
         font-family: var(--font-heading);
         transition: color 0.25s ease, background 0.25s ease;
         position: relative;
@@ -1116,8 +1124,8 @@ input:focus, select:focus, textarea:focus {
     }
 
     .mnav-item.active {
-        color: var(--primary);
-        background: rgba(108, 99, 255, 0.08);
+        color: var(--secondary);
+        background: rgba(0, 217, 255, 0.12);
     }
 
     .mnav-item.active svg {
@@ -1133,7 +1141,7 @@ input:focus, select:focus, textarea:focus {
         width: 5px;
         height: 5px;
         border-radius: 50%;
-        background: var(--primary);
+        background: var(--secondary);
     }
 
     /* Deja espacio al final de la página para que la barra no tape contenido */
