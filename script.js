@@ -548,15 +548,36 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = '';
         el.setAttribute('aria-label', originalText);
         let i = 0;
+
+        function appendWord(word, extraClass) {
+            if (word.length === 0) return;
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'split-word';
+            [...word].forEach(char => {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'split-char' + (extraClass ? ' ' + extraClass : '');
+                charSpan.style.setProperty('--i', i++);
+                charSpan.textContent = char;
+                wordSpan.appendChild(charSpan);
+            });
+            el.appendChild(wordSpan);
+        }
+
         nodes.forEach(node => {
             const text = node.textContent;
             const extraClass = node.nodeType === 1 ? node.className : '';
-            [...text].forEach(char => {
-                const span = document.createElement('span');
-                span.className = 'split-char' + (extraClass ? ' ' + extraClass : '');
-                span.style.setProperty('--i', i++);
-                span.textContent = char === ' ' ? '\u00A0' : char;
-                el.appendChild(span);
+            // Separa por palabras conservando cuántos espacios había entre ellas.
+            const parts = text.split(/( +)/);
+            parts.forEach(part => {
+                if (part.length === 0) return;
+                if (/^ +$/.test(part)) {
+                    // Deja todos los espacios menos el último como no-rompibles
+                    // (para mantener el espaciado visual original) y el último
+                    // como un espacio normal, que es donde SÍ puede saltar la línea.
+                    el.appendChild(document.createTextNode('\u00A0'.repeat(part.length - 1) + ' '));
+                } else {
+                    appendWord(part, extraClass);
+                }
             });
         });
     }
