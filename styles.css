@@ -1216,13 +1216,18 @@ body.show-contacto #privacidad { display: none; }
 }
 
 /* ==========================================================================
-   BARRA DE NAVEGACIÓN INFERIOR (SOLO MÓVIL)
+   BARRA DE NAVEGACIÓN INFERIOR (MÓVIL Y TABLET)
    ========================================================================== */
 .mobile-bottom-nav {
     display: none; /* oculta por defecto (desktop/tablet) */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px), (hover: none) and (pointer: coarse) {
+    #main-nav,
+    .header-cta {
+        display: none;
+    }
+
     .mobile-bottom-nav {
         display: flex;
         align-items: center;
