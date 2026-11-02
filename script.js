@@ -1,11 +1,11 @@
 // Constants
-const WHATSAPP = "+584166806215";
-const GA_ID = "G-XXXXXXXXXX"; // Reemplaza G-XXXXXXXXXX con tu ID real de Google Analytics 4
+const WHATSAPP = "584166806215";
 
 // Utils
 const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ==========================================================================
        1. LOADER & LOGO ANIMATION
@@ -16,29 +16,34 @@ document.addEventListener('DOMContentLoaded', () => {
     let textIndex = 0;
 
     function typeLoader() {
-        if (textIndex < textToType.length) {
+        if (loaderText && textIndex < textToType.length) {
             loaderText.innerHTML += textToType.charAt(textIndex);
             textIndex++;
             setTimeout(typeLoader, 100);
         }
     }
-    typeLoader();
 
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        loader.style.transform = 'scale(1.1)';
+    if (prefersReducedMotion) {
+        loader.style.display = 'none';
+        document.body.classList.add('loaded');
+    } else {
+        typeLoader();
         setTimeout(() => {
-            loader.style.display = 'none';
-            document.body.classList.add('loaded');
-            initCounters(); // Start counters when loaded
-        }, 500);
-    }, 2500);
+            loader.style.opacity = '0';
+            loader.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                document.body.classList.add('loaded');
+                initCounters();
+            }, 500);
+        }, 800);
+    }
 
     /* ==========================================================================
        2. CUSTOM CURSOR
        ========================================================================== */
     const cursor = document.getElementById('custom-cursor');
-    if (!isTouchDevice()) {
+    if (!isTouchDevice() && !prefersReducedMotion) {
         let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
@@ -93,24 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
        3. SCROLL PROGRESS
        ========================================================================== */
     const scrollProgress = document.getElementById('scroll-progress');
-    let scrolled50 = false;
-    let scrolled100 = false;
-
     window.addEventListener('scroll', () => {
         const scrollTop = document.documentElement.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrollPercent = (scrollTop / scrollHeight) * 100;
+        const scrollPercent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
         scrollProgress.style.width = scrollPercent + '%';
-
-        // GA4 Scroll Tracking
-        if (scrollPercent >= 50 && !scrolled50) {
-            gtag('event', 'scroll_50_porciento');
-            scrolled50 = true;
-        }
-        if (scrollPercent >= 99 && !scrolled100) {
-            gtag('event', 'scroll_100_porciento');
-            scrolled100 = true;
-        }
     });
 
     /* ==========================================================================
@@ -132,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
     let width, height, particles;
+    let heroIsVisible = false;
+    let canvasFrameId = null;
 
     function initCanvas() {
         width = canvas.width = window.innerWidth;
@@ -152,6 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function animateCanvas() {
+        canvasFrameId = null;
+        if (document.visibilityState !== 'visible' || !heroIsVisible) return;
+
         ctx.clearRect(0, 0, width, height);
         
         const connectDistance = window.innerWidth < 768 ? 80 : 120;
@@ -184,12 +181,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-        requestAnimationFrame(animateCanvas);
+        canvasFrameId = requestAnimationFrame(animateCanvas);
     }
 
-    initCanvas();
-    animateCanvas();
-    window.addEventListener('resize', initCanvas);
+    if (!prefersReducedMotion) {
+        initCanvas();
+        const heroObserver = new IntersectionObserver(([entry]) => {
+            heroIsVisible = entry.isIntersecting;
+            if (heroIsVisible && document.visibilityState === 'visible' && canvasFrameId === null) {
+                canvasFrameId = requestAnimationFrame(animateCanvas);
+            } else if (!heroIsVisible && canvasFrameId !== null) {
+                cancelAnimationFrame(canvasFrameId);
+                canvasFrameId = null;
+            }
+        });
+        heroObserver.observe(canvas);
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && heroIsVisible && canvasFrameId === null) {
+                canvasFrameId = requestAnimationFrame(animateCanvas);
+            } else if (document.visibilityState !== 'visible' && canvasFrameId !== null) {
+                cancelAnimationFrame(canvasFrameId);
+                canvasFrameId = null;
+            }
+        });
+        window.addEventListener('resize', initCanvas);
+    }
 
     /* ==========================================================================
        5. TYPEWRITER EFFECT
@@ -224,7 +240,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(typeEffect, typeSpeed);
     }
-    setTimeout(typeEffect, 1000);
+    if (prefersReducedMotion) {
+        typeTarget.textContent = phrases[0];
+    } else {
+        setTimeout(typeEffect, 1000);
+    }
 
     /* ==========================================================================
        6. SCROLL REVEAL & STAGGER
@@ -275,8 +295,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     countersStarted = true;
                     counters.forEach(counter => {
                         const target = +counter.getAttribute('data-target');
+                        if (prefersReducedMotion) {
+                            counter.innerText = target;
+                            return;
+                        }
+
                         const duration = 2000;
-                        const increment = target / (duration / 16); // 60fps
+                        const increment = target / (duration / 16);
                         
                         let current = 0;
                         const updateCounter = () => {
@@ -299,10 +324,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if(statsSection) counterObserver.observe(statsSection);
     }
 
+    if (prefersReducedMotion) initCounters();
+
     /* ==========================================================================
        8. TILT 3D
        ========================================================================== */
-    if (!isTouchDevice()) {
+    if (!isTouchDevice() && !prefersReducedMotion) {
         const tiltCards = document.querySelectorAll('[data-tilt]');
         tiltCards.forEach(card => {
             card.addEventListener('mousemove', e => {
@@ -335,11 +362,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Close all
             document.querySelectorAll('.accordion-header').forEach(h => {
                 h.classList.remove('active');
+                h.setAttribute('aria-expanded', 'false');
+                h.nextElementSibling.setAttribute('aria-hidden', 'true');
                 h.nextElementSibling.style.maxHeight = null;
             });
 
             if (!isActive) {
                 header.classList.add('active');
+                header.setAttribute('aria-expanded', 'true');
+                body.setAttribute('aria-hidden', 'false');
                 body.style.maxHeight = body.scrollHeight + "px";
             }
         });
@@ -354,18 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const msg = btn.getAttribute('data-msg');
-            const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
-            
-            // Track specific events based on classes/IDs
-            if(btn.id === 'floating-wa') {
-                gtag('event', 'click_whatsapp_flotante');
-            } else if(btn.closest('.price-card')) {
-                const planName = btn.closest('.price-card').querySelector('h3').innerText;
-                gtag('event', 'click_plan', { plan_name: planName });
-            } else if(btn.closest('.process')) {
-                gtag('event', 'click_consulta_gratis');
-            }
-            
+            const url = `https://wa.me/${WHATSAPP}?${new URLSearchParams({ text: msg })}`;
             window.open(url, '_blank');
         });
     });
@@ -373,10 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerCta = document.getElementById('header-cta');
     if (headerCta) {
         headerCta.addEventListener('click', () => {
-            gtag('event', 'click_header_cta');
             const preciosSection = document.getElementById('precios');
             if (preciosSection) {
-                preciosSection.scrollIntoView({ behavior: 'smooth' });
+                preciosSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
             }
         });
     }
@@ -385,21 +404,34 @@ document.addEventListener('DOMContentLoaded', () => {
        10b. VISTA APARTE "CONTACTO"
        ========================================================================== */
     function irAContacto(actualizarHash = true) {
+        document.body.classList.remove('show-privacidad');
         document.body.classList.add('show-contacto');
         window.scrollTo(0, 0);
         if (actualizarHash && window.location.hash !== '#contacto') {
             history.pushState(null, '', '#contacto');
         }
-        gtag('event', 'click_ir_a_contacto');
+    }
+
+    function irAPrivacidad(actualizarHash = true) {
+        document.body.classList.remove('show-contacto');
+        document.body.classList.add('show-privacidad');
+        window.scrollTo(0, 0);
+        if (actualizarHash && window.location.hash !== '#privacidad') {
+            history.pushState(null, '', '#privacidad');
+        }
     }
 
     function salirDeContacto(hash) {
         document.body.classList.remove('show-contacto');
+        document.body.classList.remove('show-privacidad');
         if (hash && hash !== '#' && hash !== '#contacto') {
             history.replaceState(null, '', hash);
             setTimeout(() => {
                 const target = document.querySelector(hash);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (target) target.scrollIntoView({
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                    block: 'start'
+                });
             }, 60);
         } else {
             history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -412,6 +444,13 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('click', (e) => {
             e.preventDefault();
             irAContacto();
+        });
+    });
+
+    document.querySelectorAll('a[href="#privacidad"]').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            irAPrivacidad();
         });
     });
 
@@ -438,15 +477,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Transición especial (fade + escala + estrellas) al volver de Contacto a Inicio
     function volverAInicioConAnimacion(hash, originEl) {
-        const contactoSection = document.getElementById('contacto');
+        if (prefersReducedMotion) {
+            salirDeContacto(hash);
+            return;
+        }
+
+        const activeView = document.body.classList.contains('show-privacidad')
+            ? document.getElementById('privacidad')
+            : document.getElementById('contacto');
         const rect = originEl.getBoundingClientRect();
         createStarBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
-        contactoSection.classList.add('page-transition-out');
+        activeView.classList.add('page-transition-out');
 
         setTimeout(() => {
             salirDeContacto(hash);
-            contactoSection.classList.remove('page-transition-out');
+            activeView.classList.remove('page-transition-out');
 
             const heroSection = document.getElementById('inicio');
             if (heroSection) {
@@ -458,8 +504,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         if (link.matches('a[href="#contacto"], .go-contact, .nav-contact-link')) return;
+        if (link.matches('a[href="#privacidad"]')) return;
         link.addEventListener('click', (e) => {
-            if (!document.body.classList.contains('show-contacto')) return;
+            if (!document.body.classList.contains('show-contacto') &&
+                !document.body.classList.contains('show-privacidad')) return;
             e.preventDefault();
             const hash = link.getAttribute('href');
             if (link.classList.contains('back-home-link')) {
@@ -473,7 +521,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerCtaBtn = document.getElementById('header-cta');
     if (headerCtaBtn) {
         const originalHeaderCtaHandler = () => {
-            if (document.body.classList.contains('show-contacto')) {
+            if (document.body.classList.contains('show-contacto') ||
+                document.body.classList.contains('show-privacidad')) {
                 salirDeContacto('#precios');
             }
         };
@@ -482,26 +531,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (window.location.hash === '#contacto') {
         irAContacto(false);
+    } else if (window.location.hash === '#privacidad') {
+        irAPrivacidad(false);
     }
 
     window.addEventListener('popstate', () => {
         if (window.location.hash === '#contacto') {
             irAContacto(false);
+        } else if (window.location.hash === '#privacidad') {
+            irAPrivacidad(false);
         } else {
             document.body.classList.remove('show-contacto');
+            document.body.classList.remove('show-privacidad');
         }
-    });
-
-    /* ==========================================================================
-       10c. BLOG CARDS (tracking de clics a artículos externos)
-       ========================================================================== */
-    const blogCards = document.querySelectorAll('.blog-card');
-    blogCards.forEach(card => {
-        card.addEventListener('click', () => {
-            gtag('event', 'click_blog_articulo', {
-                article_title: card.querySelector('h3') ? card.querySelector('h3').innerText : ''
-            });
-        });
     });
 
     /* ==========================================================================
@@ -510,6 +552,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
 
     if (form) {
+        const formStatus = document.getElementById('form-status');
+        const whatsappLink = document.getElementById('form-whatsapp-link');
+        const confirmationDialog = document.getElementById('form-confirmation');
+        const confirmationButton = document.getElementById('form-confirmation-button');
+        const confirmationWhatsappLink = document.getElementById('form-confirmation-whatsapp');
+        const confirmationClose = confirmationDialog.querySelector('.form-confirmation-close');
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        const clearFormStatus = () => {
+            formStatus.hidden = true;
+        };
+
+        form.addEventListener('invalid', () => form.classList.add('was-validated'), true);
+        form.addEventListener('input', clearFormStatus);
+        form.addEventListener('change', clearFormStatus);
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -521,22 +579,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 const budget = document.getElementById('budget').value;
                 const message = document.getElementById('message').value;
 
-                const waMessage = `Hola Zénit! Vengo desde el formulario web.%0A%0A` +
-                                  `*Nombre:* ${name}%0A` +
-                                  `*Email:* ${email}%0A` +
-                                  `*Empresa:* ${company}%0A` +
-                                  `*Proyecto:* ${type}%0A` +
-                                  `*Presupuesto:* ${budget}%0A%0A` +
+                const waMessage = `Hola Zénit! Vengo desde el formulario web.\n\n` +
+                                  `*Nombre:* ${name}\n` +
+                                  `*Email:* ${email}\n` +
+                                  `*Empresa:* ${company}\n` +
+                                  `*Proyecto:* ${type}\n` +
+                                  `*Presupuesto:* ${budget}\n\n` +
                                   `*Mensaje:* ${message}`;
+                const whatsappUrl = `https://wa.me/${WHATSAPP}?${new URLSearchParams({ text: waMessage })}`;
 
-                gtag('event', 'form_submit_contacto');
-
-                window.open(`https://wa.me/${WHATSAPP}?text=${waMessage}`, '_blank');
-                form.reset();
+                whatsappLink.href = whatsappUrl;
+                confirmationWhatsappLink.href = whatsappUrl;
+                const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+                confirmationWhatsappLink.hidden = Boolean(whatsappWindow);
+                if (typeof confirmationDialog.showModal === 'function') {
+                    confirmationDialog.showModal();
+                } else {
+                    formStatus.hidden = false;
+                    formStatus.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+                }
             } else {
                 form.reportValidity();
             }
         });
+
+        confirmationClose.addEventListener('click', () => confirmationDialog.close());
+        confirmationButton.addEventListener('click', () => {
+            form.reset();
+            form.classList.remove('was-validated');
+            formStatus.hidden = true;
+            confirmationDialog.close();
+        });
+        confirmationDialog.addEventListener('close', () => submitButton.focus());
     }
 
     /* ==========================================================================
@@ -599,7 +673,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        13. BOTONES MAGNÉTICOS
        ========================================================================== */
-    if (!isTouchDevice()) {
+    if (!isTouchDevice() && !prefersReducedMotion) {
         const magneticEls = document.querySelectorAll('.magnetic');
         magneticEls.forEach(el => {
             el.addEventListener('mousemove', (e) => {
@@ -636,7 +710,7 @@ document.addEventListener('DOMContentLoaded', () => {
        15. PARALLAX SUAVE DEL HERO
        ========================================================================== */
     const heroSection = document.querySelector('.hero');
-    if (heroSection) {
+    if (heroSection && !prefersReducedMotion) {
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             if (scrollY < window.innerHeight) {
@@ -658,7 +732,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setActiveMobileNav(targetId) {
         mobileNavItems.forEach(item => {
-            item.classList.toggle('active', item.getAttribute('data-target') === targetId);
+            const isActive = item.getAttribute('data-target') === targetId;
+            item.classList.toggle('active', isActive);
+            if (isActive) {
+                item.setAttribute('aria-current', 'location');
+            } else {
+                item.removeAttribute('aria-current');
+            }
         });
     }
 
@@ -682,7 +762,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileNavSections.length && 'IntersectionObserver' in window) {
         const mobileNavObserver = new IntersectionObserver((entries) => {
             // Si el usuario está viendo la vista aislada de Contacto, no tocar la barra
-            if (document.body.classList.contains('show-contacto')) return;
+            if (document.body.classList.contains('show-contacto') ||
+                document.body.classList.contains('show-privacidad')) return;
 
             let mostVisible = null;
             let maxRatio = 0;
